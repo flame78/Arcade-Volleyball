@@ -13,6 +13,7 @@
     ball.setAttribute('fill', '#F00');
     ball.speedX = 0;
     ball.speedY = 0;
+    ball.speedY = 0;
     var pl1 = document.createElementNS(svgNS, 'circle');
     pl1.setAttribute('cx', WIDTH / 4);
     pl1.setAttribute('cy', HEIGHT / (1 + (1 / 20)));
