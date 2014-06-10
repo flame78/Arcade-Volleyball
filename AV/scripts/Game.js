@@ -74,7 +74,6 @@
         }
     }
 
-
     function nextFrame() {
 
         var ballY = parseInt(ball.getAttribute('cy'));
