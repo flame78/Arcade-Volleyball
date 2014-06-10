@@ -4,7 +4,7 @@
     var КПД = 0.8;
     var CIRCLE_RADIUS = HEIGHT / 20;
     var G_ACCELERATION_FOR_FRAME = 9.8 / 60;
-    var RUN_ACCELERATION_FOR_FRAME = 4 / 60;
+    var RUN_ACCELERATION_FOR_FRAME = 9.8 / 60;
     var svgNS = 'http://www.w3.org/2000/svg';
     var ball = document.getElementById('ball');
     ball.setAttribute('x', WIDTH / 4 * 3- CIRCLE_RADIUS);
@@ -76,7 +76,6 @@
     }
 
     function nextFrame() {
-        console.log((ball.speedX + ball.speedY) / 100 + 's');
         var ballY = parseInt(ball.getAttribute('y'))- CIRCLE_RADIUS;
         var ballX = parseInt(ball.getAttribute('x')) - CIRCLE_RADIUS;
         var pl1x = parseInt(pl1.getAttribute('cx'));
@@ -91,15 +90,17 @@
 
         if (pl1.movingLeft) {
            
-            if (pl1x >= 0 + CIRCLE_RADIUS - 1 - pl1.speedX) {
-                pl1.setAttribute('cx', pl1x - pl1.speedX);
+            if (pl1x >= 0 + CIRCLE_RADIUS + 1 + pl1.speedX) {
+                       pl1.setAttribute('cx', pl1x - pl1.speedX);
+              //  pl1.setAttribute('cx', ballX+CIRCLE_RADIUS);
                 pl1.speedX = pl1.speedX + pl1.speedX * RUN_ACCELERATION_FOR_FRAME;
             }
         }
 
         if (pl1.movingRight) {
             if (pl1x <= WIDTH / 2 - 2 - CIRCLE_RADIUS - pl1.speedX ) {
-                pl1.setAttribute('cx', pl1x + pl1.speedX);
+                 pl1.setAttribute('cx', pl1x + pl1.speedX);
+              //  pl1.setAttribute('cx', ballX + CIRCLE_RADIUS);
                 pl1.speedX = pl1.speedX + pl1.speedX * RUN_ACCELERATION_FOR_FRAME;
             }
         }
@@ -127,24 +128,22 @@
 
     function aI() {
 
-
-
         var pl1x = parseInt(pl1.getAttribute('cx'));
         var ballX = parseInt(ball.getAttribute('x')) - CIRCLE_RADIUS;
 
-        if (ballX-CIRCLE_RADIUS/2 < pl1x) {
+        if (ballX < pl1x ) {
             if (pl1.speedX == 0 || pl1.movingRight) pl1.speedX = 1;
             
             pl1.movingLeft = true;
             pl1.movingRight = false;
         }
-        else {
+        else if (ballX > pl1x ) {
             if (pl1.speedX == 0 || pl1.movingLeft) pl1.speedX = 1;
             pl1.movingRight = true;
             pl1.movingLeft = false;
         }
-
     }
+
     function checkForCollision() {
         var ballY = parseInt(ball.getAttribute('y')) + CIRCLE_RADIUS;
         var ballX = parseInt(ball.getAttribute('x')) + CIRCLE_RADIUS;
