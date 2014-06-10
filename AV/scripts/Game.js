@@ -79,50 +79,84 @@
 
         var ballY = parseInt(ball.getAttribute('cy'));
         var ballX = parseInt(ball.getAttribute('cx'));
+        var pl1x = parseInt(pl1.getAttribute('cx'));
+        var pl2x = parseInt(pl2.getAttribute('cx'));
         ball.setAttribute('cx', ballX + ball.speedX);
         ball.setAttribute('cy', ballY + ball.speedY);
         ball.speedY = ball.speedY + G_ACCELERATION_FOR_FRAME;
 
-             checkForCollision();
+        checkForCollision();
 
+        aI();
+
+        if (pl1.movingLeft) {
+           
+            if (pl1x >= 0 + CIRCLE_RADIUS - 1 - pl1.speedX) {
+                pl1.setAttribute('cx', pl1x - pl1.speedX);
+                pl1.speedX = pl1.speedX + pl1.speedX * RUN_ACCELERATION_FOR_FRAME;
+            }
+        }
+
+        if (pl1.movingRight) {
+            if (pl1x <= WIDTH / 2 - 2 - CIRCLE_RADIUS + pl1.speedX ) {
+                pl1.setAttribute('cx', pl1x + pl1.speedX);
+                pl1.speedX = pl1.speedX + pl1.speedX * RUN_ACCELERATION_FOR_FRAME;
+            }
+        }
 
         if (!pl2.movingLeft || !pl2.movingRight) {
 
             if (pl2.movingLeft) {
-                var pl2x = parseInt(pl2.getAttribute('cx'));
                 if (pl2x >= WIDTH / 2 + 2 + CIRCLE_RADIUS + pl2.speedX) {
                     pl2.setAttribute('cx', pl2x - pl2.speedX);
                     pl2.speedX = pl2.speedX + pl2.speedX * RUN_ACCELERATION_FOR_FRAME;
                     //console.log(pl2.speedX);
                 }
-                else {
-                    pl2.movingLeft == false;
-                }
             }
 
             if (pl2.movingRight) {
-                var pl2x = parseInt(pl2.getAttribute('cx'));
                 if (pl2x <= WIDTH - CIRCLE_RADIUS - 1 - pl2.speedX) {
                     pl2.setAttribute('cx', pl2x + pl2.speedX);
                     pl2.speedX = pl2.speedX + pl2.speedX * RUN_ACCELERATION_FOR_FRAME;
                 }
-                else {
-                    pl2.movingRight == false;
-                }
             }
-
-
-
 
             requestAnimationFrame(nextFrame);
         }
     }
 
+    function aI() {
+
+        var pl1x = parseInt(pl1.getAttribute('cx'));
+        var ballX = parseInt(ball.getAttribute('cx'));
+
+        if (ballX-CIRCLE_RADIUS/2 < pl1x) {
+            if (pl1.speedX == 0 || pl1.movingRight) pl1.speedX = 1;
+            
+            pl1.movingLeft = true;
+            pl1.movingRight = false;
+        }
+        else {
+            if (pl1.speedX == 0 || pl1.movingLeft) pl1.speedX = 1;
+            pl1.movingRight = true;
+            pl1.movingLeft = false;
+        }
+
+    }
     function checkForCollision() {
         var ballY = parseInt(ball.getAttribute('cy'));
         var ballX = parseInt(ball.getAttribute('cx'));
         var pl2Y = parseInt(pl2.getAttribute('cy'));
         var pl2X = parseInt(pl2.getAttribute('cx'));
+        var pl1Y = parseInt(pl1.getAttribute('cy'));
+        var pl1X = parseInt(pl1.getAttribute('cx'));
+
+        // collision with pl1
+        if ((ballX - pl1X) * (ballX - pl1X) + (ballY - pl1Y) * (ballY - pl1Y) <= (CIRCLE_RADIUS * 2) * (CIRCLE_RADIUS * 2)) {
+            ball.speedY = -ball.speedY * КПД;
+            ball.speedX = (ballX - pl1X) * КПД;
+            return;
+        }
 
         // collision with pl2
         if ((ballX - pl2X) * (ballX - pl2X) + (ballY - pl2Y) * (ballY - pl2Y) <= (CIRCLE_RADIUS * 2) * (CIRCLE_RADIUS * 2)) {
@@ -131,15 +165,15 @@
             return;
         }
 
-        if ((ballX - CIRCLE_RADIUS) <= 1){
+        if ((ballX - CIRCLE_RADIUS) <= 1) {
             ball.speedX = Math.abs(ball.speedX * КПД);
         }
-         
+
         if ((WIDTH - 1) <= (ballX + CIRCLE_RADIUS)) {
             ball.speedX = -ball.speedX * КПД;
         }
 
-        if ((WIDTH / 2) >= (ballX - CIRCLE_RADIUS) && ball.speedX < 0 && ballY >= HEIGHT / 2 - CIRCLE_RADIUS) {
+        if ((WIDTH / 2) >= (ballX - CIRCLE_RADIUS) && (WIDTH / 2) <= (ballX + CIRCLE_RADIUS) && ballY >= HEIGHT / 2 - CIRCLE_RADIUS) {
             ball.speedX = -ball.speedX * КПД;
         }
     }
