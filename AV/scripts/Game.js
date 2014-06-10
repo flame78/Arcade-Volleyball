@@ -76,6 +76,7 @@
     }
 
     function nextFrame() {
+        console.log((ball.speedX + ball.speedY) / 100 + 's');
         var ballY = parseInt(ball.getAttribute('y'))- CIRCLE_RADIUS;
         var ballX = parseInt(ball.getAttribute('x')) - CIRCLE_RADIUS;
         var pl1x = parseInt(pl1.getAttribute('cx'));
