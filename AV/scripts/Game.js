@@ -6,11 +6,11 @@
     var G_ACCELERATION_FOR_FRAME = 9.8 / 60;
     var RUN_ACCELERATION_FOR_FRAME = 4 / 60;
     var svgNS = 'http://www.w3.org/2000/svg';
-    var ball = document.createElementNS(svgNS, 'circle');
-    ball.setAttribute('cx', WIDTH / 4 * 3);
-    ball.setAttribute('cy', HEIGHT / 10);
-    ball.setAttribute('r', CIRCLE_RADIUS);
-    ball.setAttribute('fill', '#F00');
+    var ball = document.getElementById('ball');
+    ball.setAttribute('x', WIDTH / 4 * 3- CIRCLE_RADIUS);
+    ball.setAttribute('y', HEIGHT / 10 - CIRCLE_RADIUS);
+  /*  ball.setAttribute('r', CIRCLE_RADIUS);
+    ball.setAttribute('fill', '#F00'); */
     ball.speedX = 0;
     ball.speedY = 0;
     ball.speedY = 0;
@@ -76,13 +76,12 @@
     }
 
     function nextFrame() {
-
-        var ballY = parseInt(ball.getAttribute('cy'));
-        var ballX = parseInt(ball.getAttribute('cx'));
+        var ballY = parseInt(ball.getAttribute('y'))- CIRCLE_RADIUS;
+        var ballX = parseInt(ball.getAttribute('x')) - CIRCLE_RADIUS;
         var pl1x = parseInt(pl1.getAttribute('cx'));
         var pl2x = parseInt(pl2.getAttribute('cx'));
-        ball.setAttribute('cx', ballX + ball.speedX);
-        ball.setAttribute('cy', ballY + ball.speedY);
+        ball.setAttribute('x', ballX + CIRCLE_RADIUS + ball.speedX);
+        ball.setAttribute('y', ballY + CIRCLE_RADIUS + ball.speedY);
         ball.speedY = ball.speedY + G_ACCELERATION_FOR_FRAME;
 
         checkForCollision();
@@ -127,8 +126,10 @@
 
     function aI() {
 
+
+
         var pl1x = parseInt(pl1.getAttribute('cx'));
-        var ballX = parseInt(ball.getAttribute('cx'));
+        var ballX = parseInt(ball.getAttribute('x')) - CIRCLE_RADIUS;
 
         if (ballX-CIRCLE_RADIUS/2 < pl1x) {
             if (pl1.speedX == 0 || pl1.movingRight) pl1.speedX = 1;
@@ -144,8 +145,8 @@
 
     }
     function checkForCollision() {
-        var ballY = parseInt(ball.getAttribute('cy'));
-        var ballX = parseInt(ball.getAttribute('cx'));
+        var ballY = parseInt(ball.getAttribute('y')) + CIRCLE_RADIUS;
+        var ballX = parseInt(ball.getAttribute('x')) + CIRCLE_RADIUS;
         var pl2Y = parseInt(pl2.getAttribute('cy'));
         var pl2X = parseInt(pl2.getAttribute('cx'));
         var pl1Y = parseInt(pl1.getAttribute('cy'));
