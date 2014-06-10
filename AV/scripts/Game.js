@@ -98,7 +98,7 @@
         }
 
         if (pl1.movingRight) {
-            if (pl1x <= WIDTH / 2 - 2 - CIRCLE_RADIUS + pl1.speedX ) {
+            if (pl1x <= WIDTH / 2 - 2 - CIRCLE_RADIUS - pl1.speedX ) {
                 pl1.setAttribute('cx', pl1x + pl1.speedX);
                 pl1.speedX = pl1.speedX + pl1.speedX * RUN_ACCELERATION_FOR_FRAME;
             }
