@@ -5,61 +5,31 @@
     <title></title>
 </head>
 <body>
-    <svg id='the-svg' style="border:1px solid black">
-        <svg id="ball" width="20" height="20" viewBox="-105 -105 210 210" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <defs>
-                <clipPath id="ball">
-                    <circle r="100" stroke-width="0" />
-                </clipPath>
-                <radialGradient id="shadow1" cx=".4" cy=".3" r=".8">
-                    <stop offset="0" stop-color="white" stop-opacity="1" />
-                    <stop offset=".4" stop-color="white" stop-opacity="1" />
-                    <stop offset=".8" stop-color="#EEEEEE" stop-opacity="1" />
-                </radialGradient>
-                <radialGradient id="shadow2" cx=".5" cy=".5" r=".5">
-                    <stop offset="0" stop-color="white" stop-opacity="0" />
-                    <stop offset=".8" stop-color="white" stop-opacity="0" />
-                    <stop offset=".99" stop-color="black" stop-opacity=".3" />
-                    <stop offset="1" stop-color="black" stop-opacity="1" />
-                </radialGradient>
-                <g id="black_stuff" stroke-linejoin="round" clip-path="url(#ball)">
-                    <g fill="black">
-                        <path d="M 6,-32 Q 26,-28 46,-19 Q 57,-35 64,-47 Q 50,-68 37,-76 Q 17,-75 1,-68 Q 4,-51 6,-32" />
-                        <path d="M -26,-2 Q -45,-8 -62,-11 Q -74,5 -76,22 Q -69,40 -50,54 Q -32,47 -17,39 Q -23,15 -26,-2" />
-                        <path d="M -95,22 Q -102,12 -102,-8 V 80 H -85 Q -95,45 -95,22" />
-                        <path d="M 55,24 Q 41,41 24,52 Q 28,65 31,79 Q 55,78 68,67 Q 78,50 80,35 Q 65,28 55,24" />
-                        <path d="M 0,120 L -3,95 Q -25,93 -42,82 Q -50,84 -60,81" />
-                        <path d="M -90,-48 Q -80,-52 -68,-49 Q -52,-71 -35,-77 Q -35,-100 -40,-100 H -100" />
-                        <path d="M 100,-55 L 87,-37 Q 98,-10 97,5 L 100,6" />
-                    </g>
-                    <g fill="none">
-                        <path d="M 6,-32 Q -18,-12 -26,-2
-                     M 46,-19 Q 54,5 55,24
-                     M 64,-47 Q 77,-44 87,-37
-                     M 37,-76 Q 39,-90 36,-100
-                     M 1,-68 Q -13,-77 -35,-77
-                     M -62,-11 Q -67,-25 -68,-49
-                     M -76,22 Q -85,24 -95,22
-                     M -50,54 Q -49,70 -42,82
-                     M -17,39 Q 0,48 24,52
-                     M 31,79 Q 20,92 -3,95
-                     M 68,67 L 80,80
-                     M 80,35 Q 90,25 97,5
-            " />
-                    </g>
-                </g>
-            </defs>
-            <circle r="100" fill="white" stroke="none" />
-            <circle r="100" fill="url(#shadow1)" stroke="none" />
-            <g>
-                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="360" begin="0s" dur="0.5s" repeatCount="indefinite" id="rotation"/>
-                <use xlink:href="#black_stuff" stroke="#EEE" stroke-width="7" />
-                <use xlink:href="#black_stuff" stroke="#DDD" stroke-width="4" />
-                <use xlink:href="#black_stuff" stroke="#999" stroke-width="2" />
-                <use xlink:href="#black_stuff" stroke="black" stroke-width="1" />
-            </g>
-            <circle r="100" fill="url(#shadow2)" stroke="none" />
-        </svg>
+    <svg id="the-svg" style="border:1px solid black">
+        <svg id="ball" style="border:1px solid black" viewBox="0 0 504 504">
+<g id="Layer_2">
+	<circle cx="250" cy="250" r="250"/>
+</g>
+<g id="Layer_3" transform = "rotate(0 250 250)" >
+	<path fill="#FFFFFF" d="M77,256c0,0,0-136,131-174c0,0-54,50.5-55.5,82.5c0,0-39,19.5-48,43C104.5,207.5,85.5,254,77,256z"/>
+	<path fill="#FFFFFF" d="M168.5,143.5c0,0,19.5-51,74-66c0,0,13.5-5.5,40.5,0.5c0,0,35.5,8,18,15c0,0-69.5,25-100,90
+		c0,0-2,14-9.5,10c0,0-13-8.5-23-25C168.5,168,163.5,156.5,168.5,143.5z"/>
+	<path fill="#FFFFFF" d="M213,182.5c0,0,27.5-39.5,68-64c0,0,20-14,35-20c0,0,11.5-6,24.5,2c0,0,18,11,28,19.5c0,0,12,11,2,17
+		c0,0-60.5,22.5-90.5,64.5c0,0-11,12-20,25.5c0,0-1,9.5-15,4.5c0,0-26-11.5-34.5-26.5C210.5,205,202.5,197,213,182.5z"/>
+	<path fill="#FFFFFF" d="M277,217.5c0,0,29.5-41.5,96.5-71c0,0,12.5-5.5,19.5,4.5c0,0,18,21,25,47c0,0,7.5,12.5-5.5,11.5
+		c0,0-52.5,7-81,40c0,0-5.5,8-14,5c0,0-32.5-6.5-42-19.5C275.5,235,266.5,230.5,277,217.5z"/>
+	<path fill="#FFFFFF" d="M409.5,227.5c0,0,34,113-98.5,188c0,0,136-44.5,111-191.5c0,0-3-13.5-9-8C413,216,408,214.5,409.5,227.5z"
+		/>
+	<path fill="#FFFFFF" d="M351.5,245c0,0,42.5-32,52.5-12.5c0,0,15.5,33-18.5,96c0,0-39.5,82-121.5,95c0,0,75.5-51,86.5-117.5
+		c0,0,6.5-14-1-32C349.5,274,334.5,254.5,351.5,245z"/>
+	<path fill="#FFFFFF" d="M164.5,180c0,0,28.5,61,160.5,85.5c0,0,15.5-3,16.5,15.5c0,0,3,41-22,57.5c0,0-6,8-21,3.5
+		c0,0-143.5-13-189.5-105c0,0-9-15,2-27.5c0,0,11-21,34.5-32.5C145.5,177,158.5,169.5,164.5,180z"/>
+	<path fill="#FFFFFF" d="M106.5,252c0,0,51.168,89.668,185.168,96.334c0,0,25.666-4.668,19.999,8.332c0,0-3.333,20.999-35,35.333
+		c0,0-8.667,2.002-18.666,1.335c0,0-114.001-5.334-167.001-88.834c0,0-6.5-6.5-5.5-32.5C85.5,272,89,228,106.5,252z"/>
+	<path fill="#FFFFFF" d="M99.5,329.5c0,0,66,75,162,76c0,0,8.5,0,0.5,5.5c0,0-8.75,14.75-26.5,12.5C235.5,423.5,127,410,99.5,329.5z
+		"/>
+</g>
+</svg>
             </svg>
 </body>
 </html>
