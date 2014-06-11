@@ -236,16 +236,16 @@
             ball.speedY = Math.abs(ball.speedY * КПД);
         }
 
-
-        if ((ballX - CIRCLE_RADIUS) <= 1) {
-            ball.speedX = Math.abs(ball.speedX * КПД);
-            ball.setAttribute('x', 1);
+        // with left wall
+        if ((ballX - CIRCLE_RADIUS) < 0) {
+            ball.speedX = -ball.speedX * КПД;
+            ball.setAttribute('x', 0);
         }
 
-        if ((WIDTH -  CIRCLE_RADIUS * 2) < (ballX)) {
-            ball.speedX = -Math.abs(ball.speedX * КПД);
-            console.log(ball.speedX);
-            ball.setAttribute('x', (WIDTH -  CIRCLE_RADIUS * 2)+ball.speedX);
+        // with right wall
+        if ((WIDTH -  CIRCLE_RADIUS ) < (ballX)) {
+            ball.speedX = -ball.speedX * КПД;
+            ball.setAttribute('x', (WIDTH -  CIRCLE_RADIUS * 2));
         }
 
         if ((WIDTH / 2) >= (ballX - CIRCLE_RADIUS) && (WIDTH / 2) <= (ballX + CIRCLE_RADIUS) && ballY >= HEIGHT / 2 - CIRCLE_RADIUS) {
