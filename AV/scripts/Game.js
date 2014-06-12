@@ -276,7 +276,7 @@ window.onload = function () {
         // collision with pl1
         if ((ballX - pl1X) * (ballX - pl1X) + (ballY - pl1Y) * (ballY - pl1Y) <= (CIRCLE_RADIUS * 2) * (CIRCLE_RADIUS * 2)) {
             ball.speedY = -ball.speedY * КПД + pl1.speedY;
-            ball.speedX = (ballX - pl1X) * КПД;
+            ball.speedX = (ballX - pl1X)/4 * КПД;
             ball.setAttribute('y', pl1Y - CIRCLE_RADIUS * 3);
             return;
         }
@@ -284,7 +284,7 @@ window.onload = function () {
         // collision with pl2
         if ((ballX - pl2X) * (ballX - pl2X) + (ballY - pl2Y) * (ballY - pl2Y) <= (CIRCLE_RADIUS * 2) * (CIRCLE_RADIUS * 2)) {
             ball.speedY = -ball.speedY * КПД - pl2.speedY;
-            ball.speedX = (ballX - pl2X) * КПД;
+            ball.speedX = (ballX - pl2X)/4 * КПД;
             ball.setAttribute('y', pl2Y - CIRCLE_RADIUS * 3);
         }
 
