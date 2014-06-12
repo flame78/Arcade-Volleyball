@@ -313,10 +313,21 @@ window.onload = function () {
         }
 
 
-        // net
-        if ((WIDTH / 2) >= (ballX - CIRCLE_RADIUS) && (WIDTH / 2) <= (ballX + CIRCLE_RADIUS) && ballY >= HEIGHT / 2 - CIRCLE_RADIUS) {
+        // net from right
+        if ((WIDTH / 2) >= (ballX - CIRCLE_RADIUS) && ballY >= HEIGHT / 2  && ballX>WIDTH/2){
             ball.speedX = -ball.speedX * КПД;
+            ball.setAttribute('x', WIDTH / 2);
+            ballX = WIDTH / 2 + CIRCLE_RADIUS;
         }
+
+        // net from left
+        if ((WIDTH / 2) <= (ballX + CIRCLE_RADIUS) && ballY >= HEIGHT / 2 && ballX < WIDTH / 2 + CIRCLE_RADIUS) {
+            ball.speedX = -ball.speedX * КПД;
+            ball.setAttribute('x', WIDTH / 2 - CIRCLE_RADIUS * 2);
+            ballX = WIDTH / 2 - CIRCLE_RADIUS;
+        }
+
+        //(WIDTH / 2) >= (ballX - CIRCLE_RADIUS) && 
     }
 
 
