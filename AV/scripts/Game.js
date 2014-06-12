@@ -3,7 +3,6 @@
 window.onload = function () {
 
     function Player(element, radius, color, x, y, minLeft, maxRight) {
-        var that = this;
         var svgNS = 'http://www.w3.org/2000/svg';
         this.element = element;
         this.element.setAttribute('r', CIRCLE_RADIUS);
@@ -11,13 +10,13 @@ window.onload = function () {
         this.element.setAttribute('cx', x);
         this.element.setAttribute('cy', y);
         this.element.setAttribute('r', CIRCLE_RADIUS);
-        (function (that) {that.x = x;});
+        this.x = x;
         this.setX = function (x) {
             this.x = x;
             this.element.setAttribute('cx', x);
         }
         this.getX = this.x;
-       (function (that) { that.y = y; });
+        this.y = y; 
         this.setY = function (y) {
             this.y = y;
             this.element.setAttribute('cy', y);
@@ -170,7 +169,7 @@ window.onload = function () {
 
             if (pl1x - CIRCLE_RADIUS * 2 >= 1 + pl2.speedX) {
 
-                pl1.setAttribute('cx', pl1x + pl1.speedX);
+                pl1.setX(pl1x + pl1.speedX);
 
        //         if (!pl1.jump) {
 
@@ -180,14 +179,14 @@ window.onload = function () {
             else {
                 pl1.movingLeft = false;
                 pl1.speedX = 0;
-                pl1.setAttribute('cx', CIRCLE_RADIUS );
+                pl1.setX( CIRCLE_RADIUS );
 
             }
         }
 
         if (pl1.movingRight) {
             if (pl1x <= WIDTH/2 - CIRCLE_RADIUS * 2 - 1 - pl1.speedX) {
-                pl1.setAttribute('cx', pl1x + pl1.speedX);
+                pl1.setX( pl1x + pl1.speedX);
        //         if (!pl1.jump) {
                     pl1.speedX = pl1.speedX + RUN_ACCELERATION_FOR_FRAME;
        //         }
@@ -195,7 +194,7 @@ window.onload = function () {
             else {
                 pl1.movingRight = false;
                 pl1.speedX = 0;
-                pl1.setAttribute('cx', WIDTH/2 - CIRCLE_RADIUS-1);
+                pl1.setX( WIDTH/2 - CIRCLE_RADIUS-1);
 
             }
         }
@@ -276,7 +275,8 @@ window.onload = function () {
 
     function aI() {
 
-        var pl1x = parseFloat(pl1.getAttribute('cx'));
+        var pl1x = pl1.getX;
+        console.log(pl1x);
         var ballX = parseFloat(ball.getAttribute('x')) - CIRCLE_RADIUS;
 
         if (ballX < pl1x) {
