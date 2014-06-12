@@ -42,6 +42,42 @@ window.onload = function () {
     var G_ACCELERATION_FOR_FRAME = 9.8 / 60;
     var RUN_ACCELERATION_FOR_FRAME = 9.8 / 60;
     var svgNS = 'http://www.w3.org/2000/svg';
+
+    var svg = document.getElementById('the-svg');
+
+    svg.setAttribute('width', WIDTH);
+    svg.setAttribute('height', HEIGHT);
+
+ /*   var stage = new Kinetic.Stage({
+        container: 'container',
+        width: WIDTH,
+        height: WIDTH
+    });
+
+    var layer = new Kinetic.Layer();
+
+    var imageObj = new Image();
+
+    imageObj.onload = function () {
+        var beach = new Kinetic.Image({
+            x: 0,
+            y: 0,
+            image: imageObj,
+            width: WIDTH,
+            height: HEIGHT
+        });
+
+        // add the shape to the layer
+        layer.add(beach);
+
+        // add the layer to the stage
+        stage.add(layer);
+    };
+
+    imageObj.src = 'images/beach.jpg';*/
+
+    document.body.style.backgroundImage.link('images/beach.jpg');
+
     var ball = document.getElementById('ball');
     var l3 = document.getElementById('Layer_3');
 
@@ -49,9 +85,7 @@ window.onload = function () {
 
     var pl2 = document.createElementNS(svgNS, 'circle');
     var net = document.createElementNS(svgNS, 'rect');
-    var svg = document.getElementById('the-svg')
-    svg.setAttribute('width', WIDTH);
-    svg.setAttribute('height', HEIGHT);
+   
     net.setAttribute('x', WIDTH / 2 - 1);
     net.setAttribute('y', HEIGHT / 2);
     net.setAttribute('width', 2);
