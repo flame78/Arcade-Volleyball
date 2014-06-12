@@ -2,6 +2,39 @@
 
 window.onload = function () {
 
+    function Player(element, radius, color, x, y, minLeft, maxRight) {
+        var that = this;
+        var svgNS = 'http://www.w3.org/2000/svg';
+        this.element = element;
+        this.element.setAttribute('r', CIRCLE_RADIUS);
+        this.element.setAttribute('fill', color);
+        this.element.setAttribute('cx', x);
+        this.element.setAttribute('cy', y);
+        this.element.setAttribute('r', CIRCLE_RADIUS);
+        (function (that) {that.x = x;});
+        this.setX = function (x) {
+            this.x = x;
+            this.element.setAttribute('cx', x);
+        }
+        this.getX = this.x;
+       (function (that) { that.y = y; });
+        this.setY = function (y) {
+            this.y = y;
+            this.element.setAttribute('cy', y);
+        }
+        this.getY = this.y;
+        this.speedX = 0;
+        this.speedY = 0;
+        this.movingLeft = false;
+        this.movingRight = false;
+        this.jump = false;
+        this.jumpStopMove = false;
+        this.minLeft = minLeft;
+        this.maxRight = maxRight;
+
+        return this;
+    }
+
     var WIDTH = 320;
     var HEIGHT = 200;
     var КПД = 0.8;
@@ -12,7 +45,9 @@ window.onload = function () {
     var svgNS = 'http://www.w3.org/2000/svg';
     var ball = document.getElementById('ball');
     var l3 = document.getElementById('Layer_3');
-    var pl1 = document.createElementNS(svgNS, 'circle');
+
+    var pl1 = new Player(document.createElementNS(svgNS, 'circle'), CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y);
+
     var pl2 = document.createElementNS(svgNS, 'circle');
     var net = document.createElementNS(svgNS, 'rect');
     var svg = document.getElementById('the-svg')
@@ -25,8 +60,6 @@ window.onload = function () {
     net.setAttribute('fill', '#888');
     ball.setAttribute('width', CIRCLE_RADIUS * 2);
     ball.setAttribute('height', CIRCLE_RADIUS * 2);
-    pl1.setAttribute('r', CIRCLE_RADIUS);
-    pl1.setAttribute('fill', '#0F0');
     pl2.setAttribute('r', CIRCLE_RADIUS);
     pl2.setAttribute('fill', '#00F');
 
@@ -34,8 +67,10 @@ window.onload = function () {
 
     svg.appendChild(net);
     svg.appendChild(ball);
-    svg.appendChild(pl1);
+    svg.appendChild(pl1.element);
     svg.appendChild(pl2);
+
+    console.dir(pl1);
 
     nextFrame();
 
@@ -44,14 +79,6 @@ window.onload = function () {
         ball.setAttribute('y', HEIGHT / 10 - CIRCLE_RADIUS);
         ball.speedX = 0;
         ball.speedY = 0;
-        pl1.setAttribute('cx', WIDTH / 4);
-        pl1.setAttribute('cy', PLAYERS_Y);
-        pl1.speedX = 0;
-        pl1.speedY = 0;
-        pl1.movingLeft = false;
-        pl1.movingRight = false;
-        pl1.jump = false;
-        pl1.jumpStopMove = false;
         pl2.setAttribute('cx', WIDTH / 4 * 3);
         pl2.setAttribute('cy', PLAYERS_Y);
         pl2.speedX = 0;
@@ -125,7 +152,7 @@ window.onload = function () {
     function nextFrame() {
         var ballY = parseFloat(ball.getAttribute('y')) + CIRCLE_RADIUS;
         var ballX = parseFloat(ball.getAttribute('x')) + CIRCLE_RADIUS;
-        var pl1x = parseFloat(pl1.getAttribute('cx'));
+        var pl1x = pl1.getX;
         var pl2x = parseFloat(pl2.getAttribute('cx'));
         var pl2y = parseFloat(pl2.getAttribute('cy'));
 
@@ -270,8 +297,8 @@ window.onload = function () {
         var ballX = parseFloat(ball.getAttribute('x')) + CIRCLE_RADIUS;
         var pl2Y = parseFloat(pl2.getAttribute('cy'));
         var pl2X = parseFloat(pl2.getAttribute('cx'));
-        var pl1Y = parseFloat(pl1.getAttribute('cy'));
-        var pl1X = parseFloat(pl1.getAttribute('cx'));
+        var pl1Y = pl1.getY;
+        var pl1X = pl1.getX;
 
         // collision with pl1
         if ((ballX - pl1X) * (ballX - pl1X) + (ballY - pl1Y) * (ballY - pl1Y) <= (CIRCLE_RADIUS * 2) * (CIRCLE_RADIUS * 2)) {
