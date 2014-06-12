@@ -10,3 +10,9 @@ C:\Users\Ivan\Desktop\AV\AV\bin\AV.pdb
 C:\Users\Ivan\Desktop\AV\AV\obj\Debug\AV.csprojResolveAssemblyReference.cache
 C:\Users\Ivan\Desktop\AV\AV\obj\Debug\AV.dll
 C:\Users\Ivan\Desktop\AV\AV\obj\Debug\AV.pdb
+C:\Users\Rosen\Desktop\gdsg\AV\bin\AV.dll.config
+C:\Users\Rosen\Desktop\gdsg\AV\bin\AV.dll
+C:\Users\Rosen\Desktop\gdsg\AV\bin\AV.pdb
+C:\Users\Rosen\Desktop\gdsg\AV\obj\Debug\AV.csprojResolveAssemblyReference.cache
+C:\Users\Rosen\Desktop\gdsg\AV\obj\Debug\AV.dll
+C:\Users\Rosen\Desktop\gdsg\AV\obj\Debug\AV.pdb
