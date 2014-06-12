@@ -57,8 +57,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\beach.jpg" />
     <Content Include="index.html" />
     <Content Include="scripts\Game.js" />
+    <Content Include="scripts\kinetic-v5.1.0.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
