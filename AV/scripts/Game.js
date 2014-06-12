@@ -71,16 +71,16 @@ window.onload = function () {
         switch (e.keyIdentifier) {
 
             case "Left":
-                if (!pl2.jump) {
+          //      if (!pl2.jump) {
                     if (!pl2.movingLeft) pl2.speedX = -1;
                     pl2.movingLeft = true;
-                }
+          //      }
                 break;
             case "Right":
-                if (!pl2.jump) {
+            //    if (!pl2.jump) {
                     if (!pl2.movingRight) pl2.speedX = 1;
                     pl2.movingRight = true;
-                }
+         //       }
                 break;
             case "Up":
                 if (!pl2.jump) {
@@ -99,23 +99,23 @@ window.onload = function () {
 
             case "Left":
 
-                if (pl2.jump) {
+           /*     if (pl2.jump) {
                     pl2.jumpStopMove = true;
                 }
-                else {
+                else {*/
                     pl2.movingLeft = false;
                     pl2.speedX = 0;
-                }
+           //     }
                 break;
 
             case "Right":
-                if (pl2.jump) {
+       /*         if (pl2.jump) {
                     pl2.jumpStopMove = true;
                 }
-                else {
+                else {*/
                     pl2.movingRight = false;
                     pl2.speedX = 0;
-                }
+            //    }
                 break;
             default:
 
@@ -145,10 +145,10 @@ window.onload = function () {
 
                 pl1.setAttribute('cx', pl1x + pl1.speedX);
 
-                if (!pl1.jump) {
+       //         if (!pl1.jump) {
 
                     pl1.speedX = pl1.speedX - RUN_ACCELERATION_FOR_FRAME;
-                }
+      //          }
             }
             else {
                 pl1.movingLeft = false;
@@ -161,9 +161,9 @@ window.onload = function () {
         if (pl1.movingRight) {
             if (pl1x <= WIDTH/2 - CIRCLE_RADIUS * 2 - 1 - pl1.speedX) {
                 pl1.setAttribute('cx', pl1x + pl1.speedX);
-                if (!pl1.jump) {
+       //         if (!pl1.jump) {
                     pl1.speedX = pl1.speedX + RUN_ACCELERATION_FOR_FRAME;
-                }
+       //         }
             }
             else {
                 pl1.movingRight = false;
@@ -198,11 +198,11 @@ window.onload = function () {
             pl2.speedY = pl2.speedY - RUN_ACCELERATION_FOR_FRAME;
 
             if (pl2y >= PLAYERS_Y + 1) {
-                if (pl2.jumpStopMove) {
+         /*       if (pl2.jumpStopMove) {
                     pl2.movingLeft = false;
                     pl2.movingRight = false;
                     pl2.speedX = 0;
-                }
+                }*/
                 pl2.jumpStopMove = false;
                 pl2.jump = false;
                 pl2.speedY = 0;
@@ -217,10 +217,10 @@ window.onload = function () {
 
                 pl2.setAttribute('cx', pl2x + pl2.speedX);
 
-                if (!pl2.jump) {
+       //         if (!pl2.jump) {
 
                     pl2.speedX = pl2.speedX - RUN_ACCELERATION_FOR_FRAME;
-                }
+       //         }
             }
             else {
                 pl2.movingLeft = false;
@@ -233,9 +233,9 @@ window.onload = function () {
         if (pl2.movingRight) {
             if (pl2x <= WIDTH - CIRCLE_RADIUS*2 - 1 - pl2.speedX) {
                 pl2.setAttribute('cx', pl2x + pl2.speedX);
-                if (!pl2.jump) {
+      //          if (!pl2.jump) {
                     pl2.speedX = pl2.speedX + RUN_ACCELERATION_FOR_FRAME;
-                }
+      //          }
             }
             else {
                 pl2.movingRight = false;
