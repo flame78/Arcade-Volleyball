@@ -48,7 +48,7 @@ window.onload = function () {
     svg.setAttribute('width', WIDTH);
     svg.setAttribute('height', HEIGHT);
 
- /*   var stage = new Kinetic.Stage({
+    var stage = new Kinetic.Stage({
         container: 'container',
         width: WIDTH,
         height: WIDTH
@@ -74,7 +74,7 @@ window.onload = function () {
         stage.add(layer);
     };
 
-    imageObj.src = 'images/beach.jpg';*/
+    imageObj.src = 'images/beach.jpg';
 
     document.body.style.backgroundImage.link('images/beach.jpg');
 
