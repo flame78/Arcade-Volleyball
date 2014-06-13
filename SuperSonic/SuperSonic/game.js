@@ -30,7 +30,7 @@ window.onload = function () {
                  // 100, 240, 110, 120,
                 ]
             },
-            frameRate: 2,
+            frameRate: 60,
             frameIndex: 0
         });
 
@@ -46,9 +46,9 @@ window.onload = function () {
         var frameCount = 0;
 
         superSonic.on('frameIndexChange', function (evt) {
-            if (superSonic.animation() === 'move' && ++frameCount > 3) {
+            if (superSonic.animation() === 'move' ) {
                 superSonic.animation('idle'); // restore original animation
-                superSonic.scaleX(1); // restore original animation
+             //   superSonic.scaleX(1); // restore original animation
                 frameCount = 0;
             }
         });
