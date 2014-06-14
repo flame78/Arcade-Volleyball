@@ -3,7 +3,7 @@
 var WIDTH = window.innerWidth;
 var HEIGHT = window.innerHeight - 5;
 var G_ACCELERATION_FOR_FRAME = 0.0006 * HEIGHT;
-var RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT ;
+var RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
 var START_JUMP_SPEED = HEIGHT / 50;
 var КПД = 0.8;
 var CIRCLE_RADIUS = HEIGHT / 20;
@@ -19,42 +19,97 @@ window.onload = function () {
     svg.setAttribute('width', WIDTH);
     svg.setAttribute('height', HEIGHT);
 
-    /*/var stage = new Kinetic.Stage({
+    var stage = new Kinetic.Stage({
         container: 'container',
         width: WIDTH,
         height: HEIGHT
     });
 
-    /*
-        var layer = new Kinetic.Layer();
-   
-       var imageObj = new Image();
-   
-       imageObj.onload = function () {
-           var beach = new Kinetic.Image({
-               x: 0,
-               y: 0,
-               image: imageObj,
-               width: WIDTH,
-               height: HEIGHT,
-               
-           });
-   
-           beach.setZIndex(10);
-   
-           // add the shape to the layer
-           layer.add(beach);
-   
-           // add the layer to the stage
-           stage.add(layer);
-       };
-   
-       imageObj.src = 'images/beach.jpg';
-   */
-    document.body.style.background = 'url("images/beach.jpg") no-repeat';
-    document.body.style.backgroundSize = WIDTH+'px ' + HEIGHT + 'px';
+    var layer = new Kinetic.Layer();
+    var imageObj = new Image();
 
-       
+    imageObj.src = "images/sonic_hd_sprite_by_moongrape-d54boq6.png";
+
+    imageObj.onload = function () {
+        var superSonic1 = new Kinetic.Sprite({
+            x: 250,
+            y: 450,
+            image: imageObj,
+            animation: 'idle',
+            animations: {
+                idle: [
+                  // x, y, width, height
+                  7, 7, 90, 120,
+                ],
+                move: [
+                  // x, y, width, height
+                  100, 7, 90, 120,
+                  200, 7, 90, 120,
+                  300, 7, 100, 120,
+                  405, 7, 105, 120,
+                  510, 7, 90, 120,
+                  610, 7, 90, 120,
+                  715, 7, 90, 120,
+                  815, 7, 105, 120,
+                  920, 7, 100, 120,
+                  7, 110, 110, 120,
+                  100, 7, 110, 120,
+                  200, 7, 110, 120,
+                  300, 7, 110, 120,
+                  7, 240, 110, 120,
+                  100, 240, 110, 120,
+                  200, 240, 110, 120,
+                ]
+            },
+            frameRate: 10,
+            frameIndex: 0
+        });
+
+        var superSonic2 = new Kinetic.Sprite({
+            x: 250,
+            y: 450,
+            image: imageObj,
+            animation: 'idle',
+            animations: {
+                idle: [
+                  // x, y, width, height
+                  7, 7, 90, 120,
+                ],
+                move: [
+                  // x, y, width, height
+                  100, 7, 90, 120,
+                  200, 7, 90, 120,
+                  300, 7, 100, 120,
+                  405, 7, 105, 120,
+                  510, 7, 90, 120,
+                  610, 7, 90, 120,
+                  715, 7, 90, 120,
+                  815, 7, 105, 120,
+                  920, 7, 100, 120,
+                  7, 110, 110, 120,
+                  100, 7, 110, 120,
+                  200, 7, 110, 120,
+                  300, 7, 110, 120,
+                  7, 240, 110, 120,
+                  100, 240, 110, 120,
+                  200, 240, 110, 120,
+                ]
+            },
+            frameRate: 10,
+            frameIndex: 0
+        });
+
+
+        layer.add(superSonic1);
+        layer.add(superSonic2);
+
+        stage.add(layer);
+    };
+
+    document.body.style.background = 'url("images/beach.jpg") no-repeat';
+    document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
+
+
 
     var ball = document.getElementById('ball');
     var l3 = document.getElementById('Layer_3');
@@ -126,7 +181,7 @@ window.onload = function () {
                 break;
 
             case 39:
-      
+
                 pl2.movingRight = false;
                 pl2.speedX = 0;
                 break;
@@ -144,7 +199,7 @@ window.onload = function () {
         ball.setAttribute('y', ballY - CIRCLE_RADIUS + ball.speedY);
 
         // rottate ball
-        l3.setAttribute('transform', 'translate(-90,-90) scale(1.35) rotate(' + 0.001*HEIGHT*(ball.speedX * ball.speedY * ball.speedX)  + ' 250 250)');
+        l3.setAttribute('transform', 'translate(-90,-90) scale(1.35) rotate(' + 0.001 * HEIGHT * (ball.speedX * ball.speedY * ball.speedX) + ' 250 250)');
 
         ball.speedY = ball.speedY + G_ACCELERATION_FOR_FRAME;
 
@@ -164,7 +219,7 @@ window.onload = function () {
         var ballX = parseFloat(ball.getAttribute('x'));
         var ballY = parseFloat(ball.getAttribute('y'));
 
-        if (!pl1.jump && ball.speedY < 10 && ballY<HEIGHT - CIRCLE_RADIUS*3 && ballY>HEIGHT/2 && ballX<WIDTH/2) {
+        if (!pl1.jump && ball.speedY < 10 && ballY < HEIGHT - CIRCLE_RADIUS * 3 && ballY > HEIGHT / 2 && ballX < WIDTH / 2) {
             pl1.speedY = START_JUMP_SPEED;
             pl1.jump = true;
         }

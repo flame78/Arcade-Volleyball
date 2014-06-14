@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\beach.jpg" />
+    <Content Include="images\sonic_hd_sprite_by_moongrape-d54boq6.png" />
     <Content Include="index.html" />
     <Content Include="scripts\Game.js" />
     <Content Include="scripts\kinetic-v5.1.0.min.js" />
