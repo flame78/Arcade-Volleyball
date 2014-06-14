@@ -15,10 +15,10 @@ window.onload = function () {
     svg.setAttribute('width', WIDTH);
     svg.setAttribute('height', HEIGHT);
 
-    var stage = new Kinetic.Stage({
+    /*/var stage = new Kinetic.Stage({
         container: 'container',
         width: WIDTH,
-        height: WIDTH
+        height: HEIGHT
     });
 
     /*
@@ -46,9 +46,11 @@ window.onload = function () {
        };
    
        imageObj.src = 'images/beach.jpg';
-   
-       document.body.style.backgroundImage.link('images/beach.jpg');
-       */
+   */
+    document.body.style.background = 'url("images/beach.jpg") no-repeat 9px 9px';
+    document.body.style.backgroundSize = WIDTH+'px ' + HEIGHT + 'px';
+
+       
 
     var ball = document.getElementById('ball');
     var l3 = document.getElementById('Layer_3');
