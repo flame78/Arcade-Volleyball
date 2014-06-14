@@ -16,3 +16,9 @@ C:\Users\Rosen\Source\Repos\Arcade-Volleyball\AV\bin\AV.pdb
 C:\Users\Rosen\Source\Repos\Arcade-Volleyball\AV\obj\Debug\AV.csprojResolveAssemblyReference.cache
 C:\Users\Rosen\Source\Repos\Arcade-Volleyball\AV\obj\Debug\AV.dll
 C:\Users\Rosen\Source\Repos\Arcade-Volleyball\AV\obj\Debug\AV.pdb
+C:\Users\Rosen\Desktop\myProject\New folder\AV\bin\AV.dll.config
+C:\Users\Rosen\Desktop\myProject\New folder\AV\bin\AV.dll
+C:\Users\Rosen\Desktop\myProject\New folder\AV\bin\AV.pdb
+C:\Users\Rosen\Desktop\myProject\New folder\AV\obj\Debug\AV.csprojResolveAssemblyReference.cache
+C:\Users\Rosen\Desktop\myProject\New folder\AV\obj\Debug\AV.dll
+C:\Users\Rosen\Desktop\myProject\New folder\AV\obj\Debug\AV.pdb
