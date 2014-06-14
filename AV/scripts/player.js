@@ -1,21 +1,25 @@
 ﻿/// <reference path="Game.js" />
 function Player(element, radius, color, x, y, minLeft, maxRight) {
-    var svgNS = 'http://www.w3.org/2000/svg';
     this.element = element;
+    /*var svgNS = 'http://www.w3.org/2000/svg';
     this.element.setAttribute('r', radius);
     this.element.setAttribute('fill', color);
     this.element.setAttribute('cx', x);
-    this.element.setAttribute('cy', y);
+    this.element.setAttribute('cy', y);*/
+    
     this.x = x;
     this.setX = function (x) {
         this.x = x;
-        this.element.setAttribute('cx', x);
+        //this.element.setAttribute('cx', x);
+        this.element.setX(this.x);
     }
     this.getX = this.x;
     this.y = y;
     this.setY = function (y) {
         this.y = y;
-        this.element.setAttribute('cy', y);
+        //this.element.setAttribute('cy', y);
+        this.element.setY(this.y);
+        
     }
     this.getY = this.y;
     this.speedX = 0;
@@ -31,6 +35,8 @@ function Player(element, radius, color, x, y, minLeft, maxRight) {
 
             if (this.x - this.speedX >= this.minLeft) {
 
+                this.element.attrs.animation = "move";
+
                 this.setX(this.x + this.speedX);
 
                 //         if (!pl1.jump) {
@@ -39,6 +45,7 @@ function Player(element, radius, color, x, y, minLeft, maxRight) {
                 //          }
             }
             else {
+                this.element.attrs.animation = "idle";
                 this.movingLeft = false;
                 this.speedX = 0;
                 this.setX(this.minLeft - 1);
@@ -48,6 +55,7 @@ function Player(element, radius, color, x, y, minLeft, maxRight) {
 
         if (this.movingRight) {
             if (this.x + this.speedX <= this.maxRight) {
+                this.element.attrs.animation = "move";
                 this.setX(this.x + this.speedX);
                 //         if (!pl1.jump) {
                 this.speedX = this.speedX + RUN_ACCELERATION_FOR_FRAME;
@@ -57,7 +65,7 @@ function Player(element, radius, color, x, y, minLeft, maxRight) {
                 this.movingRight = false;
                 this.speedX = 0;
                 this.setX(this.maxRight + 1);
-
+                this.element.attrs.animation = "idle";
             }
         }
 
@@ -80,7 +88,7 @@ function Player(element, radius, color, x, y, minLeft, maxRight) {
                 this.speedY = 0;
                 this.setY(PLAYERS_Y);
             }
-
+            
         }
 
 

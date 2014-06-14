@@ -13,6 +13,8 @@ console.log(HEIGHT);
 console.log(RUN_ACCELERATION_FOR_FRAME);
 var svgNS = 'http://www.w3.org/2000/svg';
 var svg = document.getElementById('the-svg');
+var superSonic1;
+var superSonic2;
 
 window.onload = function () {
 
@@ -26,12 +28,9 @@ window.onload = function () {
     });
 
     var layer = new Kinetic.Layer();
-    var imageObj = new Image();
-
-    imageObj.src = "images/sonic_hd_sprite_by_moongrape-d54boq6.png";
-
-    imageObj.onload = function () {
-        var superSonic1 = new Kinetic.Sprite({
+    var imageObj = document.getElementById('sprite');
+    
+         superSonic1 = new Kinetic.Sprite({
             x: 250,
             y: 450,
             image: imageObj,
@@ -61,11 +60,11 @@ window.onload = function () {
                   200, 240, 110, 120,
                 ]
             },
-            frameRate: 10,
+            frameRate: 30,
             frameIndex: 0
         });
 
-        var superSonic2 = new Kinetic.Sprite({
+         superSonic2 = new Kinetic.Sprite({
             x: 250,
             y: 450,
             image: imageObj,
@@ -95,7 +94,7 @@ window.onload = function () {
                   200, 240, 110, 120,
                 ]
             },
-            frameRate: 10,
+            frameRate: 30,
             frameIndex: 0
         });
 
@@ -104,18 +103,18 @@ window.onload = function () {
         layer.add(superSonic2);
 
         stage.add(layer);
-    };
+  
+        superSonic1.start();
+        superSonic2.start();
 
     document.body.style.background = 'url("images/beach.jpg") no-repeat';
     document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
 
-
-
     var ball = document.getElementById('ball');
     var l3 = document.getElementById('Layer_3');
 
-    var pl1 = new Player(document.createElementNS(svgNS, 'circle'), CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS);
-    var pl2 = new Player(document.createElementNS(svgNS, 'circle'), CIRCLE_RADIUS, '#00F', WIDTH / 4 * 3, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS);
+    var pl1 = new Player(superSonic1, CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS);
+    var pl2 = new Player(superSonic2, CIRCLE_RADIUS, '#00F', WIDTH / 4 * 3, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS);
 
     var net = document.createElementNS(svgNS, 'rect');
 
@@ -131,8 +130,8 @@ window.onload = function () {
 
     svg.appendChild(net);
     svg.appendChild(ball);
-    svg.appendChild(pl1.element);
-    svg.appendChild(pl2.element);
+   // svg.appendChild(pl1.element);
+   // svg.appendChild(pl2.element);
 
     nextFrame();
 
