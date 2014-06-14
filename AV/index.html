@@ -3,17 +3,17 @@
 <head>
     <script src="scripts/player.js"></script>
     <script src="scripts/kinetic-v5.1.0.min.js"></script>
-    <script src="scripts/Game.js"></script>
+    
     <style>
-        #container {position:absolute;z-index:10}
+        *{margin:auto;padding:0}
     </style>
     <title>Arcade-Volleyball</title>
 </head>
 <body>
     <div id="container">
     </div>
-        <svg id="the-svg" style="border:1px solid black">
-            <svg id="ball" style="border:1px solid black" viewBox="0 0 504 504">
+        <svg id="the-svg">
+            <svg id="ball" viewBox="0 0 504 504">
                 <g id="Layer_2">
                     <circle cx="250" cy="250" r="250" />
                 </g>
@@ -38,5 +38,7 @@
             </svg>
         </svg>
     </div>
+    <script src="scripts/Game.js"></script>
 </body>
+
 </html>

@@ -1,16 +1,20 @@
 ﻿/// <reference path="player.js" />
-var WIDTH = 320;
-var HEIGHT = 200;
+
+var WIDTH = window.innerWidth;
+var HEIGHT = window.innerHeight - 5;
+var G_ACCELERATION_FOR_FRAME = 0.0006 * HEIGHT;
+var RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT ;
+var START_JUMP_SPEED = HEIGHT / 50;
 var КПД = 0.8;
 var CIRCLE_RADIUS = HEIGHT / 20;
 var PLAYERS_Y = HEIGHT / (1 + (1 / 20));
-var G_ACCELERATION_FOR_FRAME = 9.8 / 60;
-var RUN_ACCELERATION_FOR_FRAME = 9.8 / 60;
+console.log(START_JUMP_SPEED);
+console.log(HEIGHT);
+console.log(RUN_ACCELERATION_FOR_FRAME);
 var svgNS = 'http://www.w3.org/2000/svg';
+var svg = document.getElementById('the-svg');
 
 window.onload = function () {
-
-    var svg = document.getElementById('the-svg');
 
     svg.setAttribute('width', WIDTH);
     svg.setAttribute('height', HEIGHT);
@@ -47,7 +51,7 @@ window.onload = function () {
    
        imageObj.src = 'images/beach.jpg';
    */
-    document.body.style.background = 'url("images/beach.jpg") no-repeat 9px 9px';
+    document.body.style.background = 'url("images/beach.jpg") no-repeat';
     document.body.style.backgroundSize = WIDTH+'px ' + HEIGHT + 'px';
 
        
@@ -86,8 +90,6 @@ window.onload = function () {
 
     window.onkeydown = function (e) {
 
-        console.dir(e.keyCode);
-
         switch (e.keyCode) {
 
             case 37:
@@ -104,7 +106,7 @@ window.onload = function () {
                 break;
             case 38:
                 if (!pl2.jump) {
-                    pl2.speedY = 4;
+                    pl2.speedY = START_JUMP_SPEED;
                     pl2.jump = true;
                 }
                 break;
@@ -142,7 +144,7 @@ window.onload = function () {
         ball.setAttribute('y', ballY - CIRCLE_RADIUS + ball.speedY);
 
         // rottate ball
-        l3.setAttribute('transform', 'translate(-90,-90) scale(1.35) rotate(' + (ball.speedX * ball.speedY) * 20 + ' 250 250)');
+        l3.setAttribute('transform', 'translate(-90,-90) scale(1.35) rotate(' + 0.001*HEIGHT*(ball.speedX * ball.speedY * ball.speedX)  + ' 250 250)');
 
         ball.speedY = ball.speedY + G_ACCELERATION_FOR_FRAME;
 
@@ -163,7 +165,7 @@ window.onload = function () {
         var ballY = parseFloat(ball.getAttribute('y'));
 
         if (!pl1.jump && ball.speedY < 10 && ballY<HEIGHT - CIRCLE_RADIUS*3 && ballY>HEIGHT/2 && ballX<WIDTH/2) {
-            pl1.speedY = 4;
+            pl1.speedY = START_JUMP_SPEED;
             pl1.jump = true;
         }
 

@@ -67,6 +67,7 @@ function Player(element, radius, color, x, y, minLeft, maxRight) {
 
             this.speedY = this.speedY - RUN_ACCELERATION_FOR_FRAME;
 
+
             if (this.y >= PLAYERS_Y + 1) {
                 /*       if (pl2.jumpStopMove) {
                            pl2.movingLeft = false;
