@@ -26,11 +26,25 @@ window.onload = function () {
                 ],
                 move: [
                   // x, y, width, height
+                  100, 7, 90, 120,
+                  200, 7, 90, 120,
+                  300, 7, 100, 120,
+                  405, 7, 105, 120,
+                  510, 7, 90, 120,
+                  610, 7, 90, 120,
+                  715, 7, 90, 120,
+                  815, 7, 105, 120,
+                  920, 7, 100, 120,
                   7, 110, 110, 120,
-                 // 100, 240, 110, 120,
+                  100, 7, 110, 120,
+                  200, 7, 110, 120,
+                  300, 7, 110, 120,
+                  7, 240, 110, 120,
+                  100, 240, 110, 120,
+                  200, 240, 110, 120,
                 ]
             },
-            frameRate: 60,
+            frameRate: 10,
             frameIndex: 0
         });
 
@@ -46,9 +60,9 @@ window.onload = function () {
         var frameCount = 0;
 
         superSonic.on('frameIndexChange', function (evt) {
-            if (superSonic.animation() === 'move' ) {
+            if (superSonic.animation() === 'move' && ++frameCount > 17) {
                 superSonic.animation('idle'); // restore original animation
-             //   superSonic.scaleX(1); // restore original animation
+                superSonic.scaleX(1); // restore original animation
                 frameCount = 0;
             }
         });
@@ -56,20 +70,20 @@ window.onload = function () {
         function onKeyDown(evt) {
             switch (evt.keyCode) {
                 case 37:  // left arrow
-                    superSonic.setX(superSonic.attrs.x -= 50);
+                    superSonic.setX(superSonic.attrs.x -= 40);
                     superSonic.scaleX(-1);    // this scale reverses the mario
                     superSonic.attrs.animation = "move";
                     break;
                 case 39:  // right arrow
-                    superSonic.setX(superSonic.attrs.x += 50);
+                    superSonic.setX(superSonic.attrs.x += 40);
                     superSonic.attrs.animation = "move";
                     break;
                 case 38:  // up arrow
-                    superSonic.setY(superSonic.attrs.y -= 50);
+                    superSonic.setY(superSonic.attrs.y -= 40);
                     superSonic.attrs.animation = "move";
                     break;
                 case 40:  // down arrow
-                    superSonic.setY(superSonic.attrs.y += 50);
+                    superSonic.setY(superSonic.attrs.y += 40);
                     superSonic.attrs.animation = "move";
                     break;
             }
