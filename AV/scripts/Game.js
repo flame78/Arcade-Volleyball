@@ -54,10 +54,12 @@ window.onload = function () {
               7, 110, 110, 120,
               100, 7, 110, 120,
               200, 7, 110, 120,
-             /* 300, 7, 110, 120,
+              300, 7, 110, 120
+            ],
+            rotate: [
               7, 240, 110, 120,
               100, 240, 110, 120,
-              200, 240, 110, 120,*/
+              200, 240, 110, 120
             ]
         },
         frameRate: 30,
@@ -88,17 +90,20 @@ window.onload = function () {
               7, 110, 110, 120,
               100, 7, 110, 120,
               200, 7, 110, 120,
-             /* 300, 7, 110, 120,
-             /* 7, 240, 110, 120,
-              100, 240, 110, 120,
-              200, 240, 110, 120,*/
+             300, 7, 110, 120
+            ],
+            rotate: [
+             7, 240, 110, 120,
+             100, 240, 110, 120,
+             200, 240, 110, 120
             ]
+
         },
         frameRate: 30,
         frameIndex: 0
     });
 
-    //superSonic2.scaleX(-1);
+    superSonic2.scaleX(-1);
 
     layer.add(superSonic1);
     layer.add(superSonic2);
@@ -114,8 +119,8 @@ window.onload = function () {
     var ball = document.getElementById('ball');
     var l3 = document.getElementById('Layer_3');
 
-    var pl1 = new Player(superSonic1, CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS);
-    var pl2 = new Player(superSonic2, CIRCLE_RADIUS, '#00F', WIDTH / 4 * 3, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS);
+    var pl1 = new Player(superSonic1, CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS,-15);
+    var pl2 = new Player(superSonic2, CIRCLE_RADIUS, '#00F', WIDTH / 4 * 3, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS, 75);
 
     var net = document.createElementNS(svgNS, 'rect');
 

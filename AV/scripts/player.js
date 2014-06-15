@@ -1,6 +1,7 @@
 ﻿/// <reference path="Game.js" />
-function Player(element, radius, color, x, y, minLeft, maxRight) {
+function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) {
     this.element = element;
+    this.xCompensation = xCompensation || 0 ;
     /*var svgNS = 'http://www.w3.org/2000/svg';
     this.element.setAttribute('r', radius);
     this.element.setAttribute('fill', color);
@@ -12,7 +13,7 @@ function Player(element, radius, color, x, y, minLeft, maxRight) {
     this.setX = function (x) {
         this.x = x;
         //this.element.setAttribute('cx', x);
-        this.element.setX(this.x - this.radius);
+        this.element.setX(this.x - this.radius + this.xCompensation);
     };
     this.setX(x);
 
@@ -90,6 +91,7 @@ function Player(element, radius, color, x, y, minLeft, maxRight) {
                 this.speedY = 0;
                 this.setY(PLAYERS_Y);
             }
+            this.element.attrs.animation = "rotate";
             
         }
       
