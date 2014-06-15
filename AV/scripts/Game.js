@@ -29,83 +29,84 @@ window.onload = function () {
 
     var layer = new Kinetic.Layer();
     var imageObj = document.getElementById('sprite');
-    
-         superSonic1 = new Kinetic.Sprite({
-            x: 250,
-            y: 450,
-            image: imageObj,
-            animation: 'idle',
-            animations: {
-                idle: [
-                  // x, y, width, height
-                  7, 7, 90, 120,
-                ],
-                move: [
-                  // x, y, width, height
-                  100, 7, 90, 120,
-                  200, 7, 90, 120,
-                  300, 7, 100, 120,
-                  405, 7, 105, 120,
-                  510, 7, 90, 120,
-                  610, 7, 90, 120,
-                  715, 7, 90, 120,
-                  815, 7, 105, 120,
-                  920, 7, 100, 120,
-                  7, 110, 110, 120,
-                  100, 7, 110, 120,
-                  200, 7, 110, 120,
-                  300, 7, 110, 120,
-                  7, 240, 110, 120,
-                  100, 240, 110, 120,
-                  200, 240, 110, 120,
-                ]
-            },
-            frameRate: 30,
-            frameIndex: 0
-        });
 
-         superSonic2 = new Kinetic.Sprite({
-            x: 250,
-            y: 450,
-            image: imageObj,
-            animation: 'idle',
-            animations: {
-                idle: [
-                  // x, y, width, height
-                  7, 7, 90, 120,
-                ],
-                move: [
-                  // x, y, width, height
-                  100, 7, 90, 120,
-                  200, 7, 90, 120,
-                  300, 7, 100, 120,
-                  405, 7, 105, 120,
-                  510, 7, 90, 120,
-                  610, 7, 90, 120,
-                  715, 7, 90, 120,
-                  815, 7, 105, 120,
-                  920, 7, 100, 120,
-                  7, 110, 110, 120,
-                  100, 7, 110, 120,
-                  200, 7, 110, 120,
-                  300, 7, 110, 120,
-                  7, 240, 110, 120,
-                  100, 240, 110, 120,
-                  200, 240, 110, 120,
-                ]
-            },
-            frameRate: 30,
-            frameIndex: 0
-        });
+    superSonic1 = new Kinetic.Sprite({
+        x: 250,
+        y: 450,
+        image: imageObj,
+        animation: 'idle',
+        animations: {
+            idle: [
+              // x, y, width, height
+              7, 7, 90, 120,
+            ],
+            move: [
+              // x, y, width, height
+              100, 7, 90, 120,
+              200, 7, 90, 120,
+              300, 7, 100, 120,
+              405, 7, 105, 120,
+              510, 7, 90, 120,
+              610, 7, 90, 120,
+              715, 7, 90, 120,
+              815, 7, 105, 120,
+              920, 7, 100, 120,
+              7, 110, 110, 120,
+              100, 7, 110, 120,
+              200, 7, 110, 120,
+             /* 300, 7, 110, 120,
+              7, 240, 110, 120,
+              100, 240, 110, 120,
+              200, 240, 110, 120,*/
+            ]
+        },
+        frameRate: 30,
+        frameIndex: 0
+    });
 
+    superSonic2 = new Kinetic.Sprite({
+        x: 250,
+        y: 450,
+        image: imageObj,
+        animation: 'idle',
+        animations: {
+            idle: [
+              // x, y, width, height
+              7, 7, 90, 120,
+            ],
+            move: [
+              // x, y, width, height
+              100, 7, 90, 120,
+              200, 7, 90, 120,
+              300, 7, 100, 120,
+              405, 7, 105, 120,
+              510, 7, 90, 120,
+              610, 7, 90, 120,
+              715, 7, 90, 120,
+              815, 7, 105, 120,
+              920, 7, 100, 120,
+              7, 110, 110, 120,
+              100, 7, 110, 120,
+              200, 7, 110, 120,
+             /* 300, 7, 110, 120,
+             /* 7, 240, 110, 120,
+              100, 240, 110, 120,
+              200, 240, 110, 120,*/
+            ]
+        },
+        frameRate: 30,
+        frameIndex: 0
+    });
 
-        layer.add(superSonic1);
-        layer.add(superSonic2);
+    //superSonic2.scaleX(-1);
 
-        stage.add(layer);
-  
-        superSonic1.start();
-        superSonic2.start();
+    layer.add(superSonic1);
+    layer.add(superSonic2);
+
+    stage.add(layer);
+
+    superSonic1.start();
+    superSonic2.start();
 
     document.body.style.background = 'url("images/beach.jpg") no-repeat';
     document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
@@ -130,8 +131,8 @@ window.onload = function () {
 
     svg.appendChild(net);
     svg.appendChild(ball);
-   // svg.appendChild(pl1.element);
-   // svg.appendChild(pl2.element);
+    // svg.appendChild(pl1.element);
+    // svg.appendChild(pl2.element);
 
     nextFrame();
 
