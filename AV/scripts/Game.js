@@ -142,17 +142,31 @@ window.onload = function () {
     nextFrame();
 
     function gameResult(playerOneResult, playerTwoResult) {
-        playerOneResult = 4;
-        playerTwoResult = 5;
 
-        playerOneResult.setAttribute('x', WIDTH * 2 / 4);
-        playerOneResult.setAttribute('y', HEIGHT * 1 / 4);
+        playerOneResult = new Kinetic.Stage({
+            container: 'container',
+            x: WIDTH * 2 / 4,
+            y: HEIGHT * 1 / 3
 
-        playerTwoResult.setAttribute('x', WIDTH * 3 / 4);
-        playerTwoResult.setAttribute('y', HEIGHT * 1 / 4);
+        });
 
-        console.log(playerOneResult);
+        playerTwoResult = new Kinetic.Stage({
+            container: 'container',
+            x: WIDTH * 3 / 4,
+            y: HEIGHT * 1 / 3
+
+        });
+
+
+        var layer1 = new Kinetic.Layer();
+
+        layer1.add(playerOneResult);
+        layer1.add(playerTwoResult);
+
+        stage.add(layer1);
     }
+    
+
 
     function intializeGame(ballStartX,ballStartY) {
         ball.setAttribute('x', ballStartX);
@@ -224,6 +238,8 @@ window.onload = function () {
         checkForCollision();
 
         aI();
+
+        gameResult();
 
         pl1.update();
         pl2.update();
