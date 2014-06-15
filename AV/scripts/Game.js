@@ -2,27 +2,17 @@
 
 var WIDTH = window.innerWidth-10;
 var HEIGHT = window.innerHeight - 10;
-var G_ACCELERATION_FOR_FRAME = 0.0006 * HEIGHT;
+var G_ACCELERATION_FOR_FRAME = 0.0005 * HEIGHT;
 var RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
 var START_JUMP_SPEED = HEIGHT / 50;
 var КПД = 0.8;
 var CIRCLE_RADIUS = HEIGHT / 20;
 var PLAYERS_Y = HEIGHT / (1 + (1 / 20));
 var svgNS = 'http://www.w3.org/2000/svg';
-var svg = document.getElementById('the-svg');
 var superSonic1;
 var superSonic2;
 var player1Score = 0;
 var player2Score = 0;
-var pl1s = document.createElementNS(svgNS, 'text');
-pl1s.setAttribute('x', WIDTH / 4);
-pl1s.setAttribute('y', CIRCLE_RADIUS);
-pl1s.setAttribute('fill', 'black');
-
-var pl2s = document.createElementNS(svgNS, 'text');
-pl2s.setAttribute('x', WIDTH / 4*3);
-pl2s.setAttribute('y', CIRCLE_RADIUS);
-pl2s.setAttribute('fill', 'black');
 
 
 
@@ -34,7 +24,7 @@ window.onload = function () {
         WIDTH = window.innerWidth-10;
         HEIGHT = window.innerHeight - 10;
         CIRCLE_RADIUS = HEIGHT / 20;
-         G_ACCELERATION_FOR_FRAME = 0.0006 * HEIGHT;
+         G_ACCELERATION_FOR_FRAME = 0.0005 * HEIGHT;
          RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
          START_JUMP_SPEED = HEIGHT / 50;
          PLAYERS_Y = HEIGHT / (1 + (1 / 20));
@@ -51,6 +41,13 @@ window.onload = function () {
         stage.setWidth(WIDTH);
         stage.setHeight(HEIGHT);
 
+        pl1s.setAttribute('x', WIDTH / 4);
+        pl2s.setAttribute('x', WIDTH / 4 * 3);
+        pl1s.setAttribute('y', CIRCLE_RADIUS*2);
+        pl2s.setAttribute('y', CIRCLE_RADIUS*2);
+        pl1s.setAttribute('font-size', CIRCLE_RADIUS * 2)
+        pl2s.setAttribute('font-size', CIRCLE_RADIUS * 2)
+
         pl1.setY(PLAYERS_Y);
         pl1.minLeft = CIRCLE_RADIUS;
         pl1.maxRight = WIDTH / 2 - CIRCLE_RADIUS;
@@ -59,6 +56,20 @@ window.onload = function () {
         pl2.minLeft = WIDTH / 2 + CIRCLE_RADIUS
         pl2.maxRight = WIDTH - CIRCLE_RADIUS;
     }
+
+    var svg = document.getElementById('the-svg');
+
+    var pl1s = document.createElementNS(svgNS, 'text');
+    pl1s.setAttribute('x', WIDTH / 4);
+    pl1s.setAttribute('y', CIRCLE_RADIUS*2);
+    pl1s.setAttribute('font-size', CIRCLE_RADIUS*2)
+    pl1s.setAttribute('fill', 'white');
+
+    var pl2s = document.createElementNS(svgNS, 'text');
+    pl2s.setAttribute('x', WIDTH / 4 * 3);
+    pl2s.setAttribute('y', CIRCLE_RADIUS*2);
+    pl2s.setAttribute('font-size', CIRCLE_RADIUS * 2)
+    pl2s.setAttribute('fill', 'white');
 
     svg.setAttribute('width', WIDTH);
     svg.setAttribute('height', HEIGHT);
@@ -187,41 +198,14 @@ window.onload = function () {
 
     nextFrame();
 
-    function gameResult(playerOneResult, playerTwoResult) {
-
-        pl1s.setAttribute('val', playerOneResult);
-        pl2s.setAttribute('val', playerTwoResult);
-  /*      pl1r = new Kinetic.Text({
-            x: WIDTH / 4,
-            y: 25,
-            text: playerOneResult,
-            fontSize: HEIGHT / 20,
-            fontFamily: 'Calibri',
-            fill: 'red'
-        });
-
-        pl2r = new Kinetic.Text({
-            x: WIDTH / 4 * 3,
-            y: 25,
-            text: playerTwoResult,
-            fontSize: HEIGHT / 20,
-            fontFamily: 'Calibri',
-            fill: 'green'
-        });
-
-        layer1.add(pl1r);
-        layer1.add(pl1r);
-        */
-    }
-
-
-
     function intializeGame(ballStartX, ballStartY) {
         ball.setAttribute('x', ballStartX);
         ball.setAttribute('y', ballStartY);
         ball.speedX = 0;
         ball.speedY = 0;
-        gameResult(player1Score, player2Score);
+
+        pl1s.innerHTML = player1Score;
+        pl2s.innerHTML = player2Score;
 
     }
 
@@ -320,6 +304,7 @@ window.onload = function () {
     }
 
     function checkForCollision() {
+
         var ballY = parseFloat(ball.getAttribute('y')) + CIRCLE_RADIUS;
         var ballX = parseFloat(ball.getAttribute('x')) + CIRCLE_RADIUS;
 
@@ -329,16 +314,18 @@ window.onload = function () {
             var x;
 
             if (ballX < WIDTH / 2) {
-                player1Score++;
+                player2Score++;
                 x = WIDTH / 4 * 3;
             }
             else {
-                player2Score++;
+                player1Score++;
                 x = WIDTH / 4 ;
             }
-            gameResult(player1Score, player2Score);
+            pl1s.innerHTML = player1Score;
+            pl2s.innerHTML = player2Score;
+
+
             intializeGame(x, 20);
-            //ball.speedY = -ball.speedY;
         }
 
         // with top
