@@ -151,7 +151,7 @@ window.onload = function () {
         frameIndex: 0
     });
 
-    superSonic2.scaleX(-1);
+    superSonic2.scaleX(-1); // restore original animation
 
     layer.add(superSonic1);
     layer.add(superSonic2);
