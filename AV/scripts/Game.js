@@ -2,7 +2,7 @@
 
 var WIDTH = window.innerWidth-10;
 var HEIGHT = window.innerHeight - 10;
-var G_ACCELERATION_FOR_FRAME = 0.0005 * HEIGHT;
+var G_ACCELERATION_FOR_FRAME = 0.0004 * HEIGHT;
 var RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
 var START_JUMP_SPEED = HEIGHT / 50;
 var КПД = 0.8;
@@ -24,7 +24,7 @@ window.onload = function () {
         WIDTH = window.innerWidth-10;
         HEIGHT = window.innerHeight - 10;
         CIRCLE_RADIUS = HEIGHT / 20;
-         G_ACCELERATION_FOR_FRAME = 0.0005 * HEIGHT;
+         G_ACCELERATION_FOR_FRAME = 0.0004 * HEIGHT;
          RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
          START_JUMP_SPEED = HEIGHT / 50;
          PLAYERS_Y = HEIGHT / (1 + (1 / 20));

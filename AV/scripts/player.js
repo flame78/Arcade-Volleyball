@@ -113,10 +113,12 @@ function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) 
         // collision with ball
         var ballY = parseFloat(ball.getAttribute('y')) + privateMembers.radius;
         var ballX = parseFloat(ball.getAttribute('x')) + privateMembers.radius;
-        if ((ballX - privateMembers.x) * (ballX - privateMembers.x) + (ballY - privateMembers.y) * (ballY - privateMembers.y) <= (privateMembers.radius * 2) * (privateMembers.radius * 2)) {
+        if ((ballX - privateMembers.x) * (ballX - privateMembers.x)
+            + (ballY + privateMembers.radius/2 - privateMembers.y) * (ballY + privateMembers.radius/2 - privateMembers.y) <= (privateMembers.radius * 2) * (privateMembers.radius * 2)) {
+            debugger;
             ball.speedY = -ball.speedY * КПД - privateMembers.speedY;
             ball.speedX = (ballX - privateMembers.x) / 4 * КПД;
-            ball.setAttribute('y', privateMembers.y - privateMembers.radius * 3 - 2);
+            ball.setAttribute('y', privateMembers.y - privateMembers.radius * 3.4 );
         }
     }
   
