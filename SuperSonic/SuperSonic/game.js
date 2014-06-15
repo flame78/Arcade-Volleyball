@@ -61,7 +61,7 @@ window.onload = function () {
 
         superSonic.on('frameIndexChange', function (evt) {
             if (superSonic.animation() === 'move' && ++frameCount > 17) {
-                superSonic.animation('idle'); // restore original animation
+                superSonic.animation('idle'); 
                 superSonic.scaleX(1); // restore original animation
                 frameCount = 0;
             }

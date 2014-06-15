@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AV", "AV\AV.csproj", "{BC6F2433-5142-4F4D-9F29-49F2E7268B69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperSonic", "SuperSonic\SuperSonic.csproj", "{FE2154E8-96FD-4E2D-8199-A4C2FB24224C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{BC6F2433-5142-4F4D-9F29-49F2E7268B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC6F2433-5142-4F4D-9F29-49F2E7268B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC6F2433-5142-4F4D-9F29-49F2E7268B69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE2154E8-96FD-4E2D-8199-A4C2FB24224C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE2154E8-96FD-4E2D-8199-A4C2FB24224C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE2154E8-96FD-4E2D-8199-A4C2FB24224C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE2154E8-96FD-4E2D-8199-A4C2FB24224C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
