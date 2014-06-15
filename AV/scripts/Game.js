@@ -1,16 +1,13 @@
 ﻿/// <reference path="player.js" />
 
-var WIDTH = window.innerWidth;
-var HEIGHT = window.innerHeight - 5;
+var WIDTH = window.innerWidth-10;
+var HEIGHT = window.innerHeight - 10;
 var G_ACCELERATION_FOR_FRAME = 0.0006 * HEIGHT;
 var RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
 var START_JUMP_SPEED = HEIGHT / 50;
 var КПД = 0.8;
 var CIRCLE_RADIUS = HEIGHT / 20;
 var PLAYERS_Y = HEIGHT / (1 + (1 / 20));
-console.log(START_JUMP_SPEED);
-console.log(HEIGHT);
-console.log(RUN_ACCELERATION_FOR_FRAME);
 var svgNS = 'http://www.w3.org/2000/svg';
 var svg = document.getElementById('the-svg');
 var superSonic1;
@@ -27,7 +24,41 @@ pl2s.setAttribute('x', WIDTH / 4*3);
 pl2s.setAttribute('y', CIRCLE_RADIUS);
 pl2s.setAttribute('fill', 'black');
 
+
+
 window.onload = function () {
+
+    window.onresize = function () {
+
+
+        WIDTH = window.innerWidth-10;
+        HEIGHT = window.innerHeight - 10;
+        CIRCLE_RADIUS = HEIGHT / 20;
+         G_ACCELERATION_FOR_FRAME = 0.0006 * HEIGHT;
+         RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
+         START_JUMP_SPEED = HEIGHT / 50;
+         PLAYERS_Y = HEIGHT / (1 + (1 / 20));
+        net.setAttribute('x', WIDTH / 2 - 1);
+        net.setAttribute('y', HEIGHT / 2);
+        net.setAttribute('width', 5);
+        net.setAttribute('height', HEIGHT / 2);
+        net.setAttribute('fill', '#888');
+        ball.setAttribute('width', CIRCLE_RADIUS * 2);
+        ball.setAttribute('height', CIRCLE_RADIUS * 2);
+        document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
+        svg.setAttribute('width', WIDTH);
+        svg.setAttribute('height', HEIGHT);
+        stage.setWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+
+        pl1.setY(PLAYERS_Y);
+        pl1.minLeft = CIRCLE_RADIUS;
+        pl1.maxRight = WIDTH / 2 - CIRCLE_RADIUS;
+
+        pl2.setY(PLAYERS_Y);
+        pl2.minLeft = WIDTH / 2 + CIRCLE_RADIUS
+        pl2.maxRight = WIDTH - CIRCLE_RADIUS;
+    }
 
     svg.setAttribute('width', WIDTH);
     svg.setAttribute('height', HEIGHT);
@@ -157,9 +188,6 @@ window.onload = function () {
     nextFrame();
 
     function gameResult(playerOneResult, playerTwoResult) {
-
-        console.log(playerOneResult);
-        console.log(playerTwoResult);
 
         pl1s.setAttribute('val', playerOneResult);
         pl2s.setAttribute('val', playerTwoResult);
@@ -309,7 +337,6 @@ window.onload = function () {
                 x = WIDTH / 4 ;
             }
             gameResult(player1Score, player2Score);
-            debugger;
             intializeGame(x, 20);
             //ball.speedY = -ball.speedY;
         }
