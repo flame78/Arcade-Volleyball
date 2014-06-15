@@ -73,6 +73,7 @@ window.onload = function () {
                     superSonic.setX(superSonic.attrs.x -= 40);
                     superSonic.scaleX(-1);    // this scale reverses the mario
                     superSonic.attrs.animation = "move";
+                    superSonic.attrs.x += 130;
                     break;
                 case 39:  // right arrow
                     superSonic.setX(superSonic.attrs.x += 40);
