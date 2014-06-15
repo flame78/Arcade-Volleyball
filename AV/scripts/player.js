@@ -42,6 +42,9 @@ function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) 
         privateMembers.minLeft = minLeft;
         privateMembers.maxRight = maxRight;
         privateMembers.scale = radius / 35;
+
+        this.setX((maxRight - minLeft) / 2 + minLeft);
+        this.setY(bottomY);
         
 
         debugger;
@@ -61,6 +64,8 @@ function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) 
     };
     
     this.update = function () {
+        this.setY(privateMembers.y);
+        this.setX(privateMembers.x);
         if (this.movingLeft) {
 
             if (privateMembers.x - privateMembers.speedX >= privateMembers.minLeft) {
@@ -123,8 +128,7 @@ function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) 
     }
   
     this.updateScale(radius, y, minLeft, maxRight);
-    this.setX(x);
-    this.setY(y);
+    
     this.update();
 
     return this;
