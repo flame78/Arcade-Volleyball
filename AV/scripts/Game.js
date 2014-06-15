@@ -136,6 +136,19 @@ window.onload = function () {
 
     nextFrame();
 
+    function gameResult(playerOneResult, playerTwoResult) {
+        playerOneResult = 4;
+        playerTwoResult = 5;
+
+        playerOneResult.setAttribute('x', WIDTH * 2 / 4);
+        playerOneResult.setAttribute('y', HEIGHT * 1 / 4);
+
+        playerTwoResult.setAttribute('x', WIDTH * 3 / 4);
+        playerTwoResult.setAttribute('y', HEIGHT * 1 / 4);
+
+        console.log(playerOneResult);
+    }
+
     function intializeGame() {
         ball.setAttribute('x', WIDTH / 4 * 3 - CIRCLE_RADIUS);
         ball.setAttribute('y', HEIGHT / 10 - CIRCLE_RADIUS);
