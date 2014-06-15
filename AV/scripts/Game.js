@@ -132,7 +132,7 @@ window.onload = function () {
     ball.setAttribute('width', CIRCLE_RADIUS * 2);
     ball.setAttribute('height', CIRCLE_RADIUS * 2);
 
-    intializeGame();
+    intializeGame(WIDTH / 4 * 3 - CIRCLE_RADIUS, HEIGHT / 10 - CIRCLE_RADIUS);
 
     svg.appendChild(net);
     svg.appendChild(ball);
@@ -154,9 +154,9 @@ window.onload = function () {
         console.log(playerOneResult);
     }
 
-    function intializeGame() {
-        ball.setAttribute('x', WIDTH / 4 * 3 - CIRCLE_RADIUS);
-        ball.setAttribute('y', HEIGHT / 10 - CIRCLE_RADIUS);
+    function intializeGame(ballStartX,ballStartY) {
+        ball.setAttribute('x', ballStartX);
+        ball.setAttribute('y', ballStartY);
         ball.speedX = 0;
         ball.speedY = 0;
     }
@@ -261,9 +261,12 @@ window.onload = function () {
 
         // drop
         if ((ballY + CIRCLE_RADIUS) > HEIGHT) {
-            //  alert('lose');
+
+            if (ballX < WIDTH / 2) {
+                
+            }
             // intializeGame();
-            ball.speedY = -ball.speedY;
+            //ball.speedY = -ball.speedY;
         }
 
         // with top
