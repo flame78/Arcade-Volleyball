@@ -15,6 +15,17 @@ var svgNS = 'http://www.w3.org/2000/svg';
 var svg = document.getElementById('the-svg');
 var superSonic1;
 var superSonic2;
+var player1Score = 0;
+var player2Score = 0;
+var pl1s = document.createElementNS(svgNS, 'text');
+pl1s.setAttribute('x', WIDTH / 4);
+pl1s.setAttribute('y', CIRCLE_RADIUS);
+pl1s.setAttribute('fill', 'black');
+
+var pl2s = document.createElementNS(svgNS, 'text');
+pl2s.setAttribute('x', WIDTH / 4*3);
+pl2s.setAttribute('y', CIRCLE_RADIUS);
+pl2s.setAttribute('fill', 'black');
 
 window.onload = function () {
 
@@ -108,6 +119,10 @@ window.onload = function () {
     layer.add(superSonic1);
     layer.add(superSonic2);
 
+    var layer1 = new Kinetic.Layer();
+
+    stage.add(layer1);
+
     stage.add(layer);
 
     superSonic1.start();
@@ -119,14 +134,14 @@ window.onload = function () {
     var ball = document.getElementById('ball');
     var l3 = document.getElementById('Layer_3');
 
-    var pl1 = new Player(superSonic1, CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS,-15);
+    var pl1 = new Player(superSonic1, CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS, -15);
     var pl2 = new Player(superSonic2, CIRCLE_RADIUS, '#00F', WIDTH / 4 * 3, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS, 75);
 
     var net = document.createElementNS(svgNS, 'rect');
 
     net.setAttribute('x', WIDTH / 2 - 1);
     net.setAttribute('y', HEIGHT / 2);
-    net.setAttribute('width', 2);
+    net.setAttribute('width', 5);
     net.setAttribute('height', HEIGHT / 2);
     net.setAttribute('fill', '#888');
     ball.setAttribute('width', CIRCLE_RADIUS * 2);
@@ -136,43 +151,50 @@ window.onload = function () {
 
     svg.appendChild(net);
     svg.appendChild(ball);
-    // svg.appendChild(pl1.element);
-    // svg.appendChild(pl2.element);
+    svg.appendChild(pl1s);
+    svg.appendChild(pl2s);
 
     nextFrame();
 
     function gameResult(playerOneResult, playerTwoResult) {
 
-        playerOneResult = new Kinetic.Stage({
-            container: 'container',
-            x: WIDTH * 2 / 4,
-            y: HEIGHT * 1 / 3
+        console.log(playerOneResult);
+        console.log(playerTwoResult);
 
+        pl1s.setAttribute('val', playerOneResult);
+        pl2s.setAttribute('val', playerTwoResult);
+  /*      pl1r = new Kinetic.Text({
+            x: WIDTH / 4,
+            y: 25,
+            text: playerOneResult,
+            fontSize: HEIGHT / 20,
+            fontFamily: 'Calibri',
+            fill: 'red'
         });
 
-        playerTwoResult = new Kinetic.Stage({
-            container: 'container',
-            x: WIDTH * 3 / 4,
-            y: HEIGHT * 1 / 3
-
+        pl2r = new Kinetic.Text({
+            x: WIDTH / 4 * 3,
+            y: 25,
+            text: playerTwoResult,
+            fontSize: HEIGHT / 20,
+            fontFamily: 'Calibri',
+            fill: 'green'
         });
 
-
-        var layer1 = new Kinetic.Layer();
-
-        layer1.add(playerOneResult);
-        layer1.add(playerTwoResult);
-
-        stage.add(layer1);
+        layer1.add(pl1r);
+        layer1.add(pl1r);
+        */
     }
-    
 
 
-    function intializeGame(ballStartX,ballStartY) {
+
+    function intializeGame(ballStartX, ballStartY) {
         ball.setAttribute('x', ballStartX);
         ball.setAttribute('y', ballStartY);
         ball.speedX = 0;
         ball.speedY = 0;
+        gameResult(player1Score, player2Score);
+
     }
 
     window.onkeydown = function (e) {
@@ -239,8 +261,6 @@ window.onload = function () {
 
         aI();
 
-        gameResult();
-
         pl1.update();
         pl2.update();
 
@@ -278,10 +298,19 @@ window.onload = function () {
         // drop
         if ((ballY + CIRCLE_RADIUS) > HEIGHT) {
 
+            var x;
+
             if (ballX < WIDTH / 2) {
-                
+                player1Score++;
+                x = WIDTH / 4 * 3;
             }
-            // intializeGame();
+            else {
+                player2Score++;
+                x = WIDTH / 4 ;
+            }
+            gameResult(player1Score, player2Score);
+            debugger;
+            intializeGame(x, 20);
             //ball.speedY = -ball.speedY;
         }
 
