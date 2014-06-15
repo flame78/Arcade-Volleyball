@@ -1,112 +1,129 @@
 ﻿/// <reference path="Game.js" />
-function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) {
-    this.element = element;
-    this.xCompensation = xCompensation || 0 ;
-    /*var svgNS = 'http://www.w3.org/2000/svg';
-    this.element.setAttribute('r', radius);
-    this.element.setAttribute('fill', color);
-    this.element.setAttribute('cx', x);
-    this.element.setAttribute('cy', y);*/
-    
-    this.radius = radius;
-    this.x = x;
-    this.setX = function (x) {
-        this.x = x;
-        //this.element.setAttribute('cx', x);
-        this.element.setX(this.x - this.radius + this.xCompensation);
-    };
-    this.setX(x);
 
-    this.getX = this.x;
-    this.y=y;
-    this.setY = function (y) {
-        this.y = y;
-        //this.element.setAttribute('cy', y);
-        this.element.setY(this.y - radius * 2);
-    };
-    this.setY(y);
-    this.getY = this.y;
-    this.speedX = 0;
-    this.speedY = 0;
+function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) {
+
+    var privateMembers = this;
+
+    privateMembers.radius;
+    privateMembers.bottomY;
+    privateMembers.minLef;
+    privateMembers.maxRight;
+    privateMembers.scale;
+    privateMembers.xCompensation;
+
+    privateMembers.x = x;
+    privateMembers.y = y;
+    privateMembers.speedX = 0;
+    privateMembers.speedY = 0;
+  
+    privateMembers.scale;
+    privateMembers.xCompensation = xCompensation | 0;
+    privateMembers.element = element;
+
     this.movingLeft = false;
     this.movingRight = false;
     this.jump = false;
-    this.jumpStopMove = false;
-    this.minLeft = minLeft;
-    this.maxRight = maxRight;
+    this.getX = privateMembers.x;
+    this.getY = privateMembers.y;
+
+    this.setX = function (x) {
+        privateMembers.x = x;
+        privateMembers.element.setX(privateMembers.x - privateMembers.radius + privateMembers.xCompensation* privateMembers.scale);
+    };
+
+    this.setY = function (y) {
+        privateMembers.y = y;
+        privateMembers.element.setY(privateMembers.y - privateMembers.radius*2);
+    };
+
+    this.updateScale = function (radius, bottomY, minLeft, maxRight) {
+
+        privateMembers.bottomY = bottomY;
+        privateMembers.minLeft = minLeft;
+        privateMembers.maxRight = maxRight;
+        privateMembers.scale = radius / 35;
+        
+
+        debugger;
+
+        if (privateMembers.xCompensation < 0) {
+            privateMembers.element.scaleX(privateMembers.scale);
+        }
+        else {
+            privateMembers.element.scaleX(-privateMembers.scale);
+        }
+
+        privateMembers.element.scaleY(privateMembers.scale)
+        privateMembers.radius = radius;
+
+        this.setY(bottomY);
+
+    };
+    
     this.update = function () {
         if (this.movingLeft) {
 
-            if (this.x - this.speedX >= this.minLeft) {
+            if (privateMembers.x - privateMembers.speedX >= privateMembers.minLeft) {
 
-                this.element.attrs.animation = "move";
+                privateMembers.element.attrs.animation = "move";
 
-                this.setX(this.x + this.speedX);
+                this.setX(privateMembers.x + privateMembers.speedX);
 
-                //         if (!pl1.jump) {
-
-                this.speedX = this.speedX - RUN_ACCELERATION_FOR_FRAME;
-                //          }
+                privateMembers.speedX = privateMembers.speedX - RUN_ACCELERATION_FOR_FRAME;
             }
             else {
                 this.movingLeft = false;
-                this.speedX = 0;
-                this.setX(this.minLeft - 1);
-                this.element.attrs.animation = "idle";
+                privateMembers.speedX = 0;
+                this.setX(privateMembers.minLeft - 1);
+                privateMembers.element.attrs.animation = "idle";
             }
         }
         else if (this.movingRight) {
-            if (this.x + this.speedX <= this.maxRight) {
-                this.element.attrs.animation = "move";
-                this.setX(this.x + this.speedX);
-                //         if (!pl1.jump) {
-                this.speedX = this.speedX + RUN_ACCELERATION_FOR_FRAME;
-                //         }
+
+            if (privateMembers.x + privateMembers.speedX <= privateMembers.maxRight) {
+                privateMembers.element.attrs.animation = "move";
+                this.setX(privateMembers.x + privateMembers.speedX);
+                privateMembers.speedX = privateMembers.speedX + RUN_ACCELERATION_FOR_FRAME;
             }
             else {
                 this.movingRight = false;
-                this.speedX = 0;
-                this.setX(this.maxRight + 1);
-                this.element.attrs.animation = "idle";
+                privateMembers.speedX = 0;
+                this.setX(privateMembers.maxRight + 1);
+                privateMembers.element.attrs.animation = "idle";
             }
-        } else {
-            this.element.attrs.animation = "idle";
+        }
+        else {
+            privateMembers.element.attrs.animation = "idle";
         }
          if (this.jump) {
 
-            this.setY(this.y - this.speedY);
+            this.setY(privateMembers.y - privateMembers.speedY);
 
-            this.speedY = this.speedY - RUN_ACCELERATION_FOR_FRAME;
+            privateMembers.speedY = privateMembers.speedY - RUN_ACCELERATION_FOR_FRAME;
 
-
-            if (this.y >= PLAYERS_Y + 1) {
-                /*       if (pl2.jumpStopMove) {
-                           pl2.movingLeft = false;
-                           pl2.movingRight = false;
-                           pl2.speedX = 0;
-                       }*/
-
-                this.jumpStopMove = false;
+            if (privateMembers.y >= privateMembers.bottomY + 1) {
+          
                 this.jump = false;
-                this.speedY = 0;
-                this.setY(PLAYERS_Y);
+                privateMembers.speedY = 0;
+                this.setY(privateMembers.bottomY);
             }
-            this.element.attrs.animation = "rotate";
-            
+            privateMembers.element.attrs.animation = "rotate";
         }
-      
-
-
+  
         // collision with ball
-        var ballY = parseFloat(ball.getAttribute('y')) + CIRCLE_RADIUS;
-        var ballX = parseFloat(ball.getAttribute('x')) + CIRCLE_RADIUS;
-        if ((ballX - this.x) * (ballX - this.x) + (ballY - this.y) * (ballY - this.y) <= (CIRCLE_RADIUS * 2) * (CIRCLE_RADIUS * 2)) {
-            ball.speedY = -ball.speedY * КПД - this.speedY;
-            ball.speedX = (ballX - this.x) / 4 * КПД;
-            ball.setAttribute('y', this.y - CIRCLE_RADIUS * 3 - 2);
+        var ballY = parseFloat(ball.getAttribute('y')) + privateMembers.radius;
+        var ballX = parseFloat(ball.getAttribute('x')) + privateMembers.radius;
+        if ((ballX - privateMembers.x) * (ballX - privateMembers.x) + (ballY - privateMembers.y) * (ballY - privateMembers.y) <= (privateMembers.radius * 2) * (privateMembers.radius * 2)) {
+            ball.speedY = -ball.speedY * КПД - privateMembers.speedY;
+            ball.speedX = (ballX - privateMembers.x) / 4 * КПД;
+            ball.setAttribute('y', privateMembers.y - privateMembers.radius * 3 - 2);
         }
-
     }
+  
+    this.updateScale(radius, y, minLeft, maxRight);
+    this.setX(x);
+    this.setY(y);
+    this.update();
 
     return this;
 }

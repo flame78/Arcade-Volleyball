@@ -48,13 +48,8 @@ window.onload = function () {
         pl1s.setAttribute('font-size', CIRCLE_RADIUS * 2)
         pl2s.setAttribute('font-size', CIRCLE_RADIUS * 2)
 
-        pl1.setY(PLAYERS_Y);
-        pl1.minLeft = CIRCLE_RADIUS;
-        pl1.maxRight = WIDTH / 2 - CIRCLE_RADIUS;
-
-        pl2.setY(PLAYERS_Y);
-        pl2.minLeft = WIDTH / 2 + CIRCLE_RADIUS
-        pl2.maxRight = WIDTH - CIRCLE_RADIUS;
+        pl1.updateScale(CIRCLE_RADIUS, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS);
+        pl2.updateScale(CIRCLE_RADIUS, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS);
     }
 
     var svg = document.getElementById('the-svg');
