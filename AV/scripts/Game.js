@@ -1,6 +1,6 @@
 ﻿/// <reference path="player.js" />
 
-var FRAME_RATE = 10;
+var FRAME_RATE = 30;
 var FRAME_REPEAT_TIME = 1000 / FRAME_RATE; // frame rate in ms
 var КПД = 0.8;
 var svgNS = 'http://www.w3.org/2000/svg';
@@ -29,6 +29,9 @@ window.onload = function () {
     var svg = document.getElementById('the-svg');
     var pl1s = document.createElementNS(svgNS, 'text');
     var pl2s = document.createElementNS(svgNS, 'text');
+
+    pl1s.setAttribute('fill', '#FFF');
+    pl2s.setAttribute('fill', '#FFF');
 
     document.body.style.background = 'url("images/beach.jpg") no-repeat';
     document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
