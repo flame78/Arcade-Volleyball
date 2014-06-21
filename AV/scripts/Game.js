@@ -1,5 +1,7 @@
 ﻿/// <reference path="player.js" />
 
+var FRAME_RATE = 25;
+var FRAME_REPEAT_TIME = 1000 / FRAME_RATE; // frame rate in ms
 var WIDTH = window.innerWidth-10;
 var HEIGHT = window.innerHeight - 10;
 var G_ACCELERATION_FOR_FRAME = 0.0004 * HEIGHT;
@@ -191,7 +193,8 @@ window.onload = function () {
     svg.appendChild(pl1s);
     svg.appendChild(pl2s);
 
-    nextFrame();
+    setTimeout(nextFrame, FRAME_REPEAT_TIME);
+//    nextFrame();
 
     function intializeGame(ballStartX, ballStartY) {
         ball.setAttribute('x', ballStartX);
@@ -271,7 +274,8 @@ window.onload = function () {
         pl1.update();
         pl2.update();
 
-        requestAnimationFrame(nextFrame);
+        //      requestAnimationFrame(nextFrame);
+        setTimeout(nextFrame, FRAME_REPEAT_TIME);
     }
 
     function aI() {
