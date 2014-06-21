@@ -1,35 +1,51 @@
 ﻿/// <reference path="player.js" />
 
-var FRAME_RATE = 20;
+var FRAME_RATE = 10;
 var FRAME_REPEAT_TIME = 1000 / FRAME_RATE; // frame rate in ms
-var WIDTH = window.innerWidth-10;
-var HEIGHT = window.innerHeight - 10;
-var G_ACCELERATION_FOR_FRAME = 0.0004 * HEIGHT;
-var RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
-var START_JUMP_SPEED = HEIGHT / 50;
 var КПД = 0.8;
-var CIRCLE_RADIUS = HEIGHT / 20;
-var PLAYERS_Y = HEIGHT / (1 + (1 / 20));
 var svgNS = 'http://www.w3.org/2000/svg';
-var superSonic1;
-var superSonic2;
-var player1Score = 0;
-var player2Score = 0;
+
+var WIDTH,
+    HEIGHT,
+    G_ACCELERATION_FOR_FRAME,
+    RUN_ACCELERATION_FOR_FRAME,
+    START_JUMP_SPEED,
+    CIRCLE_RADIUS,
+    PLAYERS_Y,
+    superSonic1,
+    superSonic2,
+    player1Score = 0,
+    player2Score = 0;
 
 
 
 window.onload = function () {
 
-    window.onresize = function () {
+    var net = document.createElementNS(svgNS, 'rect');
+    var ball = document.getElementById('ball');
+    var stage = new Kinetic.Stage({
+        container: 'container'
+    });
+    var svg = document.getElementById('the-svg');
+    var pl1s = document.createElementNS(svgNS, 'text');
+    var pl2s = document.createElementNS(svgNS, 'text');
 
+    document.body.style.background = 'url("images/beach.jpg") no-repeat';
+    document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
+    document.body.style.overflow = 'hidden';
 
-        WIDTH = window.innerWidth-10;
-        HEIGHT = window.innerHeight - 10;
+    updateConstants();
+
+    window.onresize = updateGame;
+
+    function updateConstants() {
+        WIDTH = window.innerWidth;
+        HEIGHT = window.innerHeight;
         CIRCLE_RADIUS = HEIGHT / 20;
-         G_ACCELERATION_FOR_FRAME = 0.0004 * HEIGHT;
-         RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
-         START_JUMP_SPEED = HEIGHT / 50;
-         PLAYERS_Y = HEIGHT / (1 + (1 / 20));
+        G_ACCELERATION_FOR_FRAME = 0.0004 * HEIGHT;
+        RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
+        START_JUMP_SPEED = HEIGHT / 50;
+        PLAYERS_Y = HEIGHT / (1 + (1 / 20));
         net.setAttribute('x', WIDTH / 2 - 1);
         net.setAttribute('y', HEIGHT / 2);
         net.setAttribute('width', 5);
@@ -45,37 +61,23 @@ window.onload = function () {
 
         pl1s.setAttribute('x', WIDTH / 4);
         pl2s.setAttribute('x', WIDTH / 4 * 3);
-        pl1s.setAttribute('y', CIRCLE_RADIUS*2);
-        pl2s.setAttribute('y', CIRCLE_RADIUS*2);
+        pl1s.setAttribute('y', CIRCLE_RADIUS * 2);
+        pl2s.setAttribute('y', CIRCLE_RADIUS * 2);
         pl1s.setAttribute('font-size', CIRCLE_RADIUS * 2)
         pl2s.setAttribute('font-size', CIRCLE_RADIUS * 2)
+    }
+
+    function updateGame() {
+     
+        updateConstants();
 
         pl1.updateScale(CIRCLE_RADIUS, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS);
         pl2.updateScale(CIRCLE_RADIUS, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS);
     }
 
-    var svg = document.getElementById('the-svg');
 
-    var pl1s = document.createElementNS(svgNS, 'text');
-    pl1s.setAttribute('x', WIDTH / 4);
-    pl1s.setAttribute('y', CIRCLE_RADIUS*2);
-    pl1s.setAttribute('font-size', CIRCLE_RADIUS*2)
-    pl1s.setAttribute('fill', 'white');
+ 
 
-    var pl2s = document.createElementNS(svgNS, 'text');
-    pl2s.setAttribute('x', WIDTH / 4 * 3);
-    pl2s.setAttribute('y', CIRCLE_RADIUS*2);
-    pl2s.setAttribute('font-size', CIRCLE_RADIUS * 2)
-    pl2s.setAttribute('fill', 'white');
-
-    svg.setAttribute('width', WIDTH);
-    svg.setAttribute('height', HEIGHT);
-
-    var stage = new Kinetic.Stage({
-        container: 'container',
-        width: WIDTH,
-        height: HEIGHT
-    });
 
     var layer = new Kinetic.Layer();
     var imageObj = document.getElementById('sprite');
@@ -112,7 +114,7 @@ window.onload = function () {
               200, 240, 110, 120
             ]
         },
-        frameRate: FRAME_RATE/2,
+        frameRate: FRAME_RATE / 2,
         frameIndex: 0
     });
 
@@ -149,7 +151,7 @@ window.onload = function () {
             ]
 
         },
-        frameRate: FRAME_RATE/2,
+        frameRate: FRAME_RATE / 2,
         frameIndex: 0
     });
 
@@ -167,24 +169,13 @@ window.onload = function () {
     superSonic1.start();
     superSonic2.start();
 
-    document.body.style.background = 'url("images/beach.jpg") no-repeat';
-    document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
+  
 
-    var ball = document.getElementById('ball');
     var l3 = document.getElementById('Layer_3');
 
     var pl1 = new Player(superSonic1, CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS, -15);
     var pl2 = new Player(superSonic2, CIRCLE_RADIUS, '#00F', WIDTH / 4 * 3, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS, 75);
 
-    var net = document.createElementNS(svgNS, 'rect');
-
-    net.setAttribute('x', WIDTH / 2 - 1);
-    net.setAttribute('y', HEIGHT / 2);
-    net.setAttribute('width', 5);
-    net.setAttribute('height', HEIGHT / 2);
-    net.setAttribute('fill', '#888');
-    ball.setAttribute('width', CIRCLE_RADIUS * 2);
-    ball.setAttribute('height', CIRCLE_RADIUS * 2);
 
     intializeGame(WIDTH / 4 * 3 - CIRCLE_RADIUS, HEIGHT / 10 - CIRCLE_RADIUS);
 
@@ -193,8 +184,9 @@ window.onload = function () {
     svg.appendChild(pl1s);
     svg.appendChild(pl2s);
 
+
     setTimeout(nextFrame, FRAME_REPEAT_TIME);
-//    nextFrame();
+    //    nextFrame();
 
     function intializeGame(ballStartX, ballStartY) {
         ball.setAttribute('x', ballStartX);
@@ -318,7 +310,7 @@ window.onload = function () {
             }
             else {
                 player1Score++;
-                x = WIDTH / 4 ;
+                x = WIDTH / 4;
             }
             pl1s.innerHTML = player1Score;
             pl2s.innerHTML = player2Score;
