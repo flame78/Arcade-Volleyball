@@ -1,6 +1,6 @@
 ﻿/// <reference path="player.js" />
 
-var FRAME_RATE = 25;
+var FRAME_RATE = 20;
 var FRAME_REPEAT_TIME = 1000 / FRAME_RATE; // frame rate in ms
 var WIDTH = window.innerWidth-10;
 var HEIGHT = window.innerHeight - 10;
@@ -112,7 +112,7 @@ window.onload = function () {
               200, 240, 110, 120
             ]
         },
-        frameRate: 30,
+        frameRate: FRAME_RATE/2,
         frameIndex: 0
     });
 
@@ -149,7 +149,7 @@ window.onload = function () {
             ]
 
         },
-        frameRate: 30,
+        frameRate: FRAME_RATE/2,
         frameIndex: 0
     });
 
