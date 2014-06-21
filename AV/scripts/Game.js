@@ -1,6 +1,6 @@
 ﻿/// <reference path="player.js" />
 
-var FRAME_RATE = 30;
+var FRAME_RATE = 50;
 var FRAME_REPEAT_TIME = 1000 / FRAME_RATE; // frame rate in ms
 var КПД = 0.8;
 var svgNS = 'http://www.w3.org/2000/svg';
@@ -12,12 +12,8 @@ var WIDTH,
     START_JUMP_SPEED,
     CIRCLE_RADIUS,
     PLAYERS_Y,
-    superSonic1,
-    superSonic2,
-    playerOnePoints = 0,
+     playerOnePoints = 0,
     playerTwoPoints = 0;
-
-
 
 window.onload = function () {
 
@@ -29,223 +25,76 @@ window.onload = function () {
     var svg = document.getElementById('the-svg');
     var playerOneScore = document.getElementById('playerOneScore');
     var playerTwoScore = document.getElementById('playerTwoScore');
-
-    document.body.style.background = 'url("images/beach.jpg") no-repeat';
-    document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
-    document.body.style.overflow = 'hidden';
-
-    updateConstants();
-
-    window.onresize = updateGame;
-
-    function updateConstants() {
-        WIDTH = window.innerWidth;
-        HEIGHT = window.innerHeight;
-        CIRCLE_RADIUS = HEIGHT / 20;
-        G_ACCELERATION_FOR_FRAME = 0.0004 * HEIGHT;
-        RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
-        START_JUMP_SPEED = HEIGHT / 50;
-        PLAYERS_Y = HEIGHT / (1 + (1 / 20));
-        net.setAttribute('x', WIDTH / 2 - 1);
-        net.setAttribute('y', HEIGHT / 2);
-        net.setAttribute('width', 5);
-        net.setAttribute('height', HEIGHT / 2);
-        net.setAttribute('fill', '#888');
-        ball.setAttribute('width', CIRCLE_RADIUS * 2);
-        ball.setAttribute('height', CIRCLE_RADIUS * 2);
-        document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
-        svg.setAttribute('width', WIDTH);
-        svg.setAttribute('height', HEIGHT);
-        stage.setWidth(WIDTH);
-        stage.setHeight(HEIGHT);
-
-        playerOneScore.setAttribute('x', WIDTH / 4);
-        playerTwoScore.setAttribute('x', WIDTH / 4 * 3);
-        playerOneScore.setAttribute('y', CIRCLE_RADIUS * 2);
-        playerTwoScore.setAttribute('y', CIRCLE_RADIUS * 2);
-        playerOneScore.setAttribute('font-size', CIRCLE_RADIUS * 2)
-        playerTwoScore.setAttribute('font-size', CIRCLE_RADIUS * 2)
-    }
-
-    function updateGame() {
-     
-        updateConstants();
-
-        pl1.updateScale(CIRCLE_RADIUS, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS);
-        pl2.updateScale(CIRCLE_RADIUS, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS);
-    }
-
-
- 
-
-
+    var l3 = document.getElementById('Layer_3');
     var layer = new Kinetic.Layer();
     var imageObj = document.getElementById('sprite');
+    var superSonic1;
+    var superSonic2;
 
-    superSonic1 = new Kinetic.Sprite({
-        x: 250,
-        y: 450,
-        image: imageObj,
-        animation: 'idle',
-        animations: {
-            idle: [
-              // x, y, width, height
-              7, 7, 90, 120,
-            ],
-            move: [
-              // x, y, width, height
-              100, 7, 90, 120,
-              200, 7, 90, 120,
-              300, 7, 100, 120,
-              405, 7, 105, 120,
-              510, 7, 90, 120,
-              610, 7, 90, 120,
-              715, 7, 90, 120,
-              815, 7, 105, 120,
-              920, 7, 100, 120,
-              7, 110, 110, 120,
-              100, 7, 110, 120,
-              200, 7, 110, 120,
-              300, 7, 110, 120
-            ],
-            rotate: [
-              7, 240, 110, 120,
-              100, 240, 110, 120,
-              200, 240, 110, 120
-            ]
-        },
-        frameRate: FRAME_RATE / 2,
-        frameIndex: 0
-    });
+    updateConstants();
+    initializeGame();
 
-    superSonic2 = new Kinetic.Sprite({
-        x: 250,
-        y: 450,
-        image: imageObj,
-        animation: 'idle',
-        animations: {
-            idle: [
-              // x, y, width, height
-              7, 7, 90, 120,
-            ],
-            move: [
-              // x, y, width, height
-              100, 7, 90, 120,
-              200, 7, 90, 120,
-              300, 7, 100, 120,
-              405, 7, 105, 120,
-              510, 7, 90, 120,
-              610, 7, 90, 120,
-              715, 7, 90, 120,
-              815, 7, 105, 120,
-              920, 7, 100, 120,
-              7, 110, 110, 120,
-              100, 7, 110, 120,
-              200, 7, 110, 120,
-             300, 7, 110, 120
-            ],
-            rotate: [
-             7, 240, 110, 120,
-             100, 240, 110, 120,
-             200, 240, 110, 120
-            ]
-
-        },
-        frameRate: FRAME_RATE / 2,
-        frameIndex: 0
-    });
-
-    superSonic2.scaleX(-1); // restore original animation
-
-    layer.add(superSonic1);
-    layer.add(superSonic2);
-
-    var layer1 = new Kinetic.Layer();
-
-    stage.add(layer1);
-
-    stage.add(layer);
-
-    superSonic1.start();
-    superSonic2.start();
-
-  
-
-    var l3 = document.getElementById('Layer_3');
-
-    var pl1 = new Player(superSonic1, CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS, -15);
-    var pl2 = new Player(superSonic2, CIRCLE_RADIUS, '#00F', WIDTH / 4 * 3, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS, 75);
-
-
-    intializeGame(WIDTH / 4 * 3 - CIRCLE_RADIUS, HEIGHT / 10 - CIRCLE_RADIUS);
-
-    svg.appendChild(net);
-    svg.appendChild(ball);
-    svg.appendChild(playerOneScore);
-    svg.appendChild(playerTwoScore);
-
+    var playerOne = new Player(superSonic1, CIRCLE_RADIUS, '#0F0', WIDTH / 4, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS, -15);
+    var playerTwo = new Player(superSonic2, CIRCLE_RADIUS, '#00F', WIDTH / 4 * 3, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS, 75);
 
     setTimeout(nextFrame, FRAME_REPEAT_TIME);
-    //    nextFrame();
 
-    function intializeGame(ballStartX, ballStartY) {
-        ball.setAttribute('x', ballStartX);
-        ball.setAttribute('y', ballStartY);
-        ball.speedX = 0;
-        ball.speedY = 0;
+    window.addEventListener('resize', updateGame);
 
-        playerOneScore.innerHTML = playerOnePoints;
-        playerTwoScore.innerHTML = playerTwoPoints;
+    window.addEventListener('click', function (e) {
+        playerOneScore.innerHTML = e.clientX;
+        playerTwoScore.innerHTML = e.clientY;
+    });
 
-    }
+    window.addEventListener('touchstart', function (e) {
+        playerOneScore.innerHTML = e.clientX;
+        playerTwoScore.innerHTML = e.clientY;
+    });
 
-    window.onkeydown = function (e) {
+    window.addEventListener('keydown', function (e) {
 
         switch (e.keyCode) {
 
             case 37:
-                //      if (!pl2.jump) {
-                if (!pl2.movingLeft) pl2.speedX = -1;
-                pl2.movingLeft = true;
-                //      }
+                if (!playerTwo.movingLeft) playerTwo.speedX = -1;
+                playerTwo.movingLeft = true;
                 break;
+
             case 39:
-                //    if (!pl2.jump) {
-                if (!pl2.movingRight) pl2.speedX = 1;
-                pl2.movingRight = true;
-                //       }
+                if (!playerTwo.movingRight) playerTwo.speedX = 1;
+                playerTwo.movingRight = true;
                 break;
+
             case 38:
-                if (!pl2.jump) {
-                    pl2.speedY = START_JUMP_SPEED;
-                    pl2.jump = true;
+                if (!playerTwo.jump) {
+                    playerTwo.speedY = START_JUMP_SPEED;
+                    playerTwo.jump = true;
                 }
                 break;
+
             default:
 
         }
-    }
+    });
 
-    window.onkeyup = function (e) {
+    window.addEventListener('keyup', function (e) {
 
         switch (e.keyCode) {
 
             case 37:
-
-                pl2.movingLeft = false;
-                pl2.speedX = 0;
+                playerTwo.movingLeft = false;
+                playerTwo.speedX = 0;
                 break;
 
             case 39:
-
-                pl2.movingRight = false;
-                pl2.speedX = 0;
+                playerTwo.movingRight = false;
+                playerTwo.speedX = 0;
                 break;
 
             default:
 
         }
-    }
+    });
 
     function nextFrame() {
         var ballY = parseFloat(ball.getAttribute('y')) + CIRCLE_RADIUS;
@@ -263,34 +112,32 @@ window.onload = function () {
 
         aI();
 
-        pl1.update();
-        pl2.update();
+        playerOne.update();
+        playerTwo.update();
 
-        //      requestAnimationFrame(nextFrame);
         setTimeout(nextFrame, FRAME_REPEAT_TIME);
     }
 
     function aI() {
 
-        var pl1x = pl1.x;
         var ballX = parseFloat(ball.getAttribute('x'));
         var ballY = parseFloat(ball.getAttribute('y'));
 
-        if (!pl1.jump && ball.speedY < 10 && ballY < HEIGHT - CIRCLE_RADIUS * 3 && ballY > HEIGHT / 2 && ballX < WIDTH / 2) {
-            pl1.speedY = START_JUMP_SPEED;
-            pl1.jump = true;
+        if (!playerOne.jump && ball.speedY < 10 && ballY < HEIGHT - CIRCLE_RADIUS * 3 && ballY > HEIGHT / 2 && ballX < WIDTH / 2) {
+            playerOne.speedY = START_JUMP_SPEED;
+            playerOne.jump = true;
         }
 
-        if (ballX < pl1x) {
-            if (pl1.speedX == 0 || pl1.movingRight) pl1.speedX = -1;
+        if (ballX < playerOne.x) {
+            if (playerOne.speedX == 0 || playerOne.movingRight) playerOne.speedX = -1;
 
-            pl1.movingLeft = true;
-            pl1.movingRight = false;
+            playerOne.movingLeft = true;
+            playerOne.movingRight = false;
         }
-        else if (ballX > pl1x) {
-            if (pl1.speedX == 0 || pl1.movingLeft) pl1.speedX = 1;
-            pl1.movingRight = true;
-            pl1.movingLeft = false;
+        else if (ballX > playerOne.x) {
+            if (playerOne.speedX == 0 || playerOne.movingLeft) playerOne.speedX = 1;
+            playerOne.movingRight = true;
+            playerOne.movingLeft = false;
         }
     }
 
@@ -302,21 +149,19 @@ window.onload = function () {
         // drop
         if ((ballY + CIRCLE_RADIUS) > HEIGHT) {
 
-            var x;
+            var newBallX;
 
             if (ballX < WIDTH / 2) {
                 playerTwoPoints++;
-                x = WIDTH / 4 * 3;
+                newBallX = WIDTH / 4 * 3;
+                playerTwoScore.innerHTML = playerTwoPoints;
             }
             else {
                 playerOnePoints++;
-                x = WIDTH / 4;
+                newBallX = WIDTH / 4;
+                playerOneScore.innerHTML = playerOnePoints;
             }
-            playerOneScore.innerHTML = playerOnePoints;
-            playerTwoScore.innerHTML = playerTwoPoints;
-
-
-            intializeGame(x, 20);
+            restartBall(newBallX, 20);
         }
 
         // with top
@@ -349,5 +194,110 @@ window.onload = function () {
             ball.setAttribute('x', WIDTH / 2 - CIRCLE_RADIUS * 2);
             ballX = WIDTH / 2 - CIRCLE_RADIUS;
         }
+    }
+
+    function sonicSprite() {
+        return {
+            x: 250,
+            y: 450,
+            image: imageObj,
+            animation: 'idle',
+            animations: {
+                idle: [
+                  // x, y, width, height
+                  7, 7, 90, 120,
+                ],
+                move: [
+                  // x, y, width, height
+                  100, 7, 90, 120,
+                  200, 7, 90, 120,
+                  300, 7, 100, 120,
+                  405, 7, 105, 120,
+                  510, 7, 90, 120,
+                  610, 7, 90, 120,
+                  715, 7, 90, 120,
+                  815, 7, 105, 120,
+                  920, 7, 100, 120,
+                  7, 110, 110, 120,
+                  100, 7, 110, 120,
+                  200, 7, 110, 120,
+                  300, 7, 110, 120
+                ],
+                rotate: [
+                  7, 240, 110, 120,
+                  100, 240, 110, 120,
+                  200, 240, 110, 120
+                ]
+            },
+            frameRate: FRAME_RATE / 2,
+            frameIndex: 0
+        };
+    }
+
+    function updateConstants() {
+        WIDTH = window.innerWidth;
+        HEIGHT = window.innerHeight;
+        CIRCLE_RADIUS = HEIGHT / 20;
+        G_ACCELERATION_FOR_FRAME = 0.0004 * HEIGHT;
+        RUN_ACCELERATION_FOR_FRAME = 0.00075 * HEIGHT;
+        START_JUMP_SPEED = HEIGHT / 50;
+        PLAYERS_Y = HEIGHT / (1 + (1 / 20));
+        net.setAttribute('x', WIDTH / 2 - 1);
+        net.setAttribute('y', HEIGHT / 2);
+        net.setAttribute('width', 5);
+        net.setAttribute('height', HEIGHT / 2);
+        net.setAttribute('fill', '#888');
+        ball.setAttribute('width', CIRCLE_RADIUS * 2);
+        ball.setAttribute('height', CIRCLE_RADIUS * 2);
+        document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
+        svg.setAttribute('width', WIDTH);
+        svg.setAttribute('height', HEIGHT);
+        stage.setWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+
+        playerOneScore.setAttribute('x', WIDTH / 4);
+        playerTwoScore.setAttribute('x', WIDTH / 4 * 3);
+        playerOneScore.setAttribute('y', CIRCLE_RADIUS * 2);
+        playerTwoScore.setAttribute('y', CIRCLE_RADIUS * 2);
+        playerOneScore.setAttribute('font-size', CIRCLE_RADIUS * 2)
+        playerTwoScore.setAttribute('font-size', CIRCLE_RADIUS * 2)
+    }
+
+    function updateGame() {
+
+        updateConstants();
+
+        playerOne.updateScale(CIRCLE_RADIUS, PLAYERS_Y, CIRCLE_RADIUS, WIDTH / 2 - CIRCLE_RADIUS);
+        playerTwo.updateScale(CIRCLE_RADIUS, PLAYERS_Y, WIDTH / 2 + CIRCLE_RADIUS, WIDTH - CIRCLE_RADIUS);
+    }
+
+    function initializeGame() {
+
+    
+
+        superSonic1 = new Kinetic.Sprite(sonicSprite());
+        superSonic2 = new Kinetic.Sprite(sonicSprite());
+
+        layer.add(superSonic1);
+        layer.add(superSonic2);
+
+        stage.add(layer);
+
+        superSonic1.start();
+        superSonic2.start();
+
+        restartBall(WIDTH / 4 * 3 - CIRCLE_RADIUS, HEIGHT / 10 - CIRCLE_RADIUS);
+
+        svg.appendChild(net);
+        svg.appendChild(ball);
+        svg.appendChild(playerOneScore);
+        svg.appendChild(playerTwoScore);
+    }
+
+    function restartBall(ballStartX, ballStartY) {
+        ball.setAttribute('x', ballStartX);
+        ball.setAttribute('y', ballStartY);
+        ball.speedX = 0;
+        ball.speedY = 0;
     }
 }
