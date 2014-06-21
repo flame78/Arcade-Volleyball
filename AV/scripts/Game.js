@@ -14,8 +14,8 @@ var WIDTH,
     PLAYERS_Y,
     superSonic1,
     superSonic2,
-    player1Score = 0,
-    player2Score = 0;
+    playerOnePoints = 0,
+    playerTwoPoints = 0;
 
 
 
@@ -27,11 +27,8 @@ window.onload = function () {
         container: 'container'
     });
     var svg = document.getElementById('the-svg');
-    var pl1s = document.createElementNS(svgNS, 'text');
-    var pl2s = document.createElementNS(svgNS, 'text');
-
-    pl1s.setAttribute('fill', '#FFF');
-    pl2s.setAttribute('fill', '#FFF');
+    var playerOneScore = document.getElementById('playerOneScore');
+    var playerTwoScore = document.getElementById('playerTwoScore');
 
     document.body.style.background = 'url("images/beach.jpg") no-repeat';
     document.body.style.backgroundSize = WIDTH + 'px ' + HEIGHT + 'px';
@@ -62,12 +59,12 @@ window.onload = function () {
         stage.setWidth(WIDTH);
         stage.setHeight(HEIGHT);
 
-        pl1s.setAttribute('x', WIDTH / 4);
-        pl2s.setAttribute('x', WIDTH / 4 * 3);
-        pl1s.setAttribute('y', CIRCLE_RADIUS * 2);
-        pl2s.setAttribute('y', CIRCLE_RADIUS * 2);
-        pl1s.setAttribute('font-size', CIRCLE_RADIUS * 2)
-        pl2s.setAttribute('font-size', CIRCLE_RADIUS * 2)
+        playerOneScore.setAttribute('x', WIDTH / 4);
+        playerTwoScore.setAttribute('x', WIDTH / 4 * 3);
+        playerOneScore.setAttribute('y', CIRCLE_RADIUS * 2);
+        playerTwoScore.setAttribute('y', CIRCLE_RADIUS * 2);
+        playerOneScore.setAttribute('font-size', CIRCLE_RADIUS * 2)
+        playerTwoScore.setAttribute('font-size', CIRCLE_RADIUS * 2)
     }
 
     function updateGame() {
@@ -184,8 +181,8 @@ window.onload = function () {
 
     svg.appendChild(net);
     svg.appendChild(ball);
-    svg.appendChild(pl1s);
-    svg.appendChild(pl2s);
+    svg.appendChild(playerOneScore);
+    svg.appendChild(playerTwoScore);
 
 
     setTimeout(nextFrame, FRAME_REPEAT_TIME);
@@ -197,8 +194,8 @@ window.onload = function () {
         ball.speedX = 0;
         ball.speedY = 0;
 
-        pl1s.innerHTML = player1Score;
-        pl2s.innerHTML = player2Score;
+        playerOneScore.innerHTML = playerOnePoints;
+        playerTwoScore.innerHTML = playerTwoPoints;
 
     }
 
@@ -308,15 +305,15 @@ window.onload = function () {
             var x;
 
             if (ballX < WIDTH / 2) {
-                player2Score++;
+                playerTwoPoints++;
                 x = WIDTH / 4 * 3;
             }
             else {
-                player1Score++;
+                playerOnePoints++;
                 x = WIDTH / 4;
             }
-            pl1s.innerHTML = player1Score;
-            pl2s.innerHTML = player2Score;
+            playerOneScore.innerHTML = playerOnePoints;
+            playerTwoScore.innerHTML = playerTwoPoints;
 
 
             intializeGame(x, 20);
