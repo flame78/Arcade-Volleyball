@@ -97,6 +97,21 @@ window.onload = function () {
     });
 
     function nextFrame() {
+
+        updateBall();
+
+        checkForCollision();
+
+        aI();
+
+        playerOne.update();
+        playerTwo.update();
+
+        setTimeout(nextFrame, FRAME_REPEAT_TIME);
+    }
+
+    function updateBall() {
+
         var ballY = parseFloat(ball.getAttribute('y')) + CIRCLE_RADIUS;
         var ballX = parseFloat(ball.getAttribute('x')) + CIRCLE_RADIUS;
 
@@ -107,15 +122,6 @@ window.onload = function () {
         l3.setAttribute('transform', 'translate(-90,-90) scale(1.35) rotate(' + 0.001 * HEIGHT * (ball.speedX * ball.speedY * ball.speedX) + ' 250 250)');
 
         ball.speedY = ball.speedY + G_ACCELERATION_FOR_FRAME;
-
-        checkForCollision();
-
-        aI();
-
-        playerOne.update();
-        playerTwo.update();
-
-        setTimeout(nextFrame, FRAME_REPEAT_TIME);
     }
 
     function aI() {
