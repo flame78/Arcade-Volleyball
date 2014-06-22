@@ -4,36 +4,34 @@ function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) 
 
     var privateMembers = this;
 
-    privateMembers.radius;
-    privateMembers.bottomY;
-    privateMembers.minLef;
-    privateMembers.maxRight;
-    privateMembers.scale;
-    privateMembers.xCompensation;
-
     privateMembers.x = x;
     privateMembers.y = y;
     privateMembers.speedX = 0;
     privateMembers.speedY = 0;
-  
+
     privateMembers.scale;
     privateMembers.xCompensation = xCompensation | 0;
     privateMembers.element = element;
+    privateMembers.radius = radius;
 
+    this.getSpeedY = function () { return privateMembers.speedY; }
+    this.getSpeedX = function () { return privateMembers.speedX; }
+    this.getRadius = function () { return privateMembers.radius; }
     this.movingLeft = false;
     this.movingRight = false;
     this.jump = false;
-    this.getX = privateMembers.x;
-    this.getY = privateMembers.y;
+    this.getX = function () { return privateMembers.x; }
+    this.getY = function () { return privateMembers.y; }
+
 
     this.setX = function (x) {
         privateMembers.x = x;
-        privateMembers.element.setX(privateMembers.x - privateMembers.radius + privateMembers.xCompensation* privateMembers.scale);
+        privateMembers.element.setX(privateMembers.x - privateMembers.radius + privateMembers.xCompensation * privateMembers.scale);
     };
 
     this.setY = function (y) {
         privateMembers.y = y;
-        privateMembers.element.setY(privateMembers.y - privateMembers.radius*2);
+        privateMembers.element.setY(privateMembers.y - privateMembers.radius * 2);
     };
 
     this.updateScale = function (radius, bottomY, minLeft, maxRight) {
@@ -45,7 +43,7 @@ function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) 
 
         this.setX((maxRight - minLeft) / 2 + minLeft);
         this.setY(bottomY);
-        
+
         if (privateMembers.xCompensation < 0) {
             privateMembers.element.scaleX(privateMembers.scale);
         }
@@ -59,8 +57,9 @@ function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) 
         this.setY(bottomY);
 
     };
-    
+
     this.update = function () {
+
         this.setY(privateMembers.y);
         this.setX(privateMembers.x);
         if (this.movingLeft) {
@@ -97,35 +96,25 @@ function Player(element, radius, color, x, y, minLeft, maxRight, xCompensation) 
         else {
             privateMembers.element.attrs.animation = "idle";
         }
-         if (this.jump) {
+        if (this.jump) {
 
-            this.setY(privateMembers.y - privateMembers.speedY);
+            debugger;
 
-            privateMembers.speedY = privateMembers.speedY - RUN_ACCELERATION_FOR_FRAME;
+            this.setY(this.getY() - this.getSpeedY());
+
+            this.speedY = privateMembers.speedY - RUN_ACCELERATION_FOR_FRAME;
 
             if (privateMembers.y >= privateMembers.bottomY + 1) {
-          
+
                 this.jump = false;
                 privateMembers.speedY = 0;
                 this.setY(privateMembers.bottomY);
             }
             privateMembers.element.attrs.animation = "rotate";
         }
-  
-        // collision with ball
-        var ballY = parseFloat(ball.getAttribute('y')) + privateMembers.radius;
-        var ballX = parseFloat(ball.getAttribute('x')) + privateMembers.radius;
-        if ((ballX - privateMembers.x) * (ballX - privateMembers.x)
-            + (ballY + privateMembers.radius/2 - privateMembers.y) * (ballY + privateMembers.radius/2 - privateMembers.y) <= (privateMembers.radius * 2) * (privateMembers.radius * 2)) {
-            ball.speedY = -ball.speedY * КПД - privateMembers.speedY;
-            ball.speedX = (ballX - privateMembers.x) / 4 * КПД;
-            ball.setAttribute('y', privateMembers.y - privateMembers.radius * 3.4 );
-        }
     }
-  
-    this.updateScale(radius, y, minLeft, maxRight);
-    
-    this.update();
 
-    return this;
+    this.updateScale(radius, y, minLeft, maxRight);
+
+    this.update();
 }

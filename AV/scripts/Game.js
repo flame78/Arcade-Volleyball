@@ -12,8 +12,11 @@ var WIDTH,
     START_JUMP_SPEED,
     CIRCLE_RADIUS,
     PLAYERS_Y,
-     playerOnePoints = 0,
-    playerTwoPoints = 0;
+    playerOnePoints = 0,
+    playerTwoPoints = 0,
+    playerOneTouch = 0,
+    playerTwoTouch = 0;
+
 
 window.onload = function () {
 
@@ -170,6 +173,30 @@ window.onload = function () {
             restartBall(newBallX, 20);
         }
 
+        // check for touch
+        if (collisionWith(playerOne)) {
+            playerOneTouch++;
+            playerTwoTouch = 0;
+            if(playerOneTouch>3){
+                playerOneTouch = 0;
+                playerTwoPoints++;
+                playerTwoScore.innerHTML = playerTwoPoints;
+                restartBall(WIDTH / 4 * 3, 20);
+            }
+
+        }
+        if (collisionWith(playerTwo)) {
+            playerOneTouch = 0;
+            playerTwoTouch++;
+            if (playerTwoTouch > 3) {
+                playerTwoTouch = 0;
+                playerOnePoints++;
+                playerOneScore.innerHTML = playerOnePoints;
+                restartBall(WIDTH / 4 , 20);
+            }
+        }
+      
+
         // with top
         if ((ballY - CIRCLE_RADIUS) <= 1) {
             ball.speedY = Math.abs(ball.speedY * КПД);
@@ -199,6 +226,22 @@ window.onload = function () {
             ball.speedX = -ball.speedX * КПД;
             ball.setAttribute('x', WIDTH / 2 - CIRCLE_RADIUS * 2);
             ballX = WIDTH / 2 - CIRCLE_RADIUS;
+        }
+    }
+
+    function collisionWith(player) {
+        // collision with ball
+        var ballY = parseFloat(ball.getAttribute('y')) + player.getRadius();
+        var ballX = parseFloat(ball.getAttribute('x')) + player.getRadius();
+
+        if ((ballX - player.getX()) * (ballX - player.getX())
+            + (ballY + player.getRadius() / 2 - player.getY()) * (ballY + player.getRadius() / 2 - player.getY()) <= (player.getRadius() * 2) * (player.getRadius() * 2)) {
+
+            ball.speedY = -ball.speedY * КПД - player.getSpeedY();
+            ball.speedX = (ballX - player.getX()) / 4 * КПД;
+            ball.setAttribute('y', player.getY() - player.getRadius() * 3.4);
+
+            return true;
         }
     }
 
@@ -279,7 +322,7 @@ window.onload = function () {
 
     function initializeGame() {
 
-    
+
 
         superSonic1 = new Kinetic.Sprite(sonicSprite());
         superSonic2 = new Kinetic.Sprite(sonicSprite());
